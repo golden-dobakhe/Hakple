@@ -1,11 +1,15 @@
 package com.golden_dobakhe.HakPle.domain.post.post.entity;
 
+import com.golden_dobakhe.HakPle.domain.post.like.entity.BoardLike;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
 import com.golden_dobakhe.HakPle.global.entity.BaseEntity;
 import com.golden_dobakhe.HakPle.global.entity.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,4 +36,13 @@ public class Board extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status; // ENUM('active', 'inactive', 'pending')
+
+    @Column(nullable = false)
+    private String academyCode; // 학원 코드
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private List<BoardLike> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Hashtag> hashtags = new ArrayList<>();
 }
