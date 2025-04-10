@@ -1,4 +1,4 @@
-version: '3.8' # Docker Compose 버전 명시
+version: '3' # Docker Compose 버전 명시
 
 services:
   mysql:
