@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class User extends BaseEntity {
     @Column(length = 100, nullable = false)
-    private String userName;
+    private String userName;  //유저아이디임
 
     @Column(nullable = false)
     private String password;
@@ -30,7 +30,7 @@ public class User extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String phoneNum;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String academyId;
 
     @Enumerated(EnumType.STRING)

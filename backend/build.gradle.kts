@@ -28,7 +28,15 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	runtimeOnly("com.h2database:h2")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+<<<<<<< HEAD
 	implementation ("org.springframework.boot:spring-boot-starter-security") //security
+=======
+	//추가
+	implementation ("org.springframework.boot:spring-boot-starter-security")
+	implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation ("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE")
+
+>>>>>>> a02dd51 (회원가입 구현)
 
 }
 

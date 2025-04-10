@@ -5,6 +5,10 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+#  security:
+#    user:
+#      name: kim
+#      password: 1234
   profiles:
     active: dev
     include: secret
