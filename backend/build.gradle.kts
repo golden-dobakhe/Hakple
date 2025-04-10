@@ -35,7 +35,7 @@ dependencies {
 
 }
 
-//// Docker Compose 설정 (정상 작동되는 버전)
+// Docker Compose 설정 (정상 작동되는 버전)
 dockerCompose {
 	useComposeFiles.set(listOf("docker-compose.yml"))
 	startedServices.set(listOf("mysql"))
