@@ -18,8 +18,8 @@ public class BoardResponse {
     private String academyCode;
     private String userNickname;
     private List<String> tags;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime creationTime;
+    private LocalDateTime modificationTime;
 
     @Builder
     public BoardResponse(Board board, List<String> tags) {
@@ -27,12 +27,12 @@ public class BoardResponse {
         this.title = board.getTitle();
         this.content = board.getContent();
         this.viewCount = board.getViewCount();
-        this.likeCount = board.getBoardLikes().size();
+        this.likeCount = (board.getBoardLikes() != null) ? board.getBoardLikes().size() : 0;
         this.status = board.getStatus();
         this.academyCode = board.getAcademyCode();
         this.userNickname = board.getUser().getNickName();
         this.tags = tags;
-        this.createdAt = board.getCreationTime();
-        this.updatedAt = board.getModificationTime();
+        this.creationTime = board.getCreationTime();
+        this.modificationTime = board.getModificationTime();
     }
 }
