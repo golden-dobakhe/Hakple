@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class MyInfoRequestDto {
+public class MyInfoResponseDto { //사용자 정보 조회용
     private String nickname;
     private String username;
     private String phoneNum;
