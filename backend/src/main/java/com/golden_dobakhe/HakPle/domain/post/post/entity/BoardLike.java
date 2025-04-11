@@ -1,9 +1,10 @@
-package com.golden_dobakhe.HakPle.domain.post.report.entity;
+package com.golden_dobakhe.HakPle.domain.post.post.entity;
 
-import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
 import com.golden_dobakhe.HakPle.global.entity.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -14,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @ToString
-public class BoardReport extends BaseEntity {
+public class BoardLike extends BaseEntity {
     @ManyToOne(optional = false)
     @JoinColumn(name = "board_id", nullable = false)
     private Board board;

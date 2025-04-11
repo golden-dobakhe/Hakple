@@ -9,24 +9,32 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @Slf4j
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
         //접근 제한
         security
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/success", "/failure").permitAll())
-                ;
-        //로그인
+                        .requestMatchers(
+                                "/", "/success", "/failure", // 기존
+                                "/swagger-ui/**",            // Swagger UI
+                                "/v3/api-docs/**",           // OpenAPI JSON
+                                "/swagger-resources/**",     // Swagger 리소스
+                                "/webjars/**"                // Swagger static
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                );
+
+        // 로그인
         security
                 .formLogin(form -> form
                         .defaultSuccessUrl("/success")
                         .failureUrl("/failure")
                 );
 
-        //로그아웃
+        // 로그아웃 (필요시 여기에 추가)
 
-        //세션
-        return  security.build();
+        return security.build();
     }
 }

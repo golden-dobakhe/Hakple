@@ -1,7 +1,10 @@
 package com.golden_dobakhe.HakPle.global.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.Arrays;
 
+@Schema(description = "댓글 상태")
 public enum Status {
     ACTIVE("active"),
     INACTIVE("inactive"),

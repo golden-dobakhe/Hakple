@@ -3,7 +3,6 @@ package com.golden_dobakhe.HakPle.domain.user.service;
 
 import com.golden_dobakhe.HakPle.domain.user.dto.UserDTO;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.entity.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
