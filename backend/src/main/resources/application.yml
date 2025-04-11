@@ -5,10 +5,6 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
-#  security:
-#    user:
-#      name: kim
-#      password: 1234
   profiles:
     active: dev
     include: secret
@@ -56,3 +52,8 @@ custom:
     frontUrl: "${custom.dev.frontUrl}"
     backUrl: "${custom.dev.backUrl}"
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html # Swagger UI 접근 경로
+  api-docs:
+    path: /v3/api-docs # OpenAPI 문서 경로
