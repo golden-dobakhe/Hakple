@@ -1,9 +1,9 @@
-package com.golden_dobakhe.HakPle.domain.post.comment.comment;
+package com.golden_dobakhe.HakPle.domain.post.comment;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "댓글 처리 결과 코드")
-public enum CommentDeleteResult {
+public enum CommentResult {
 
     @Schema(description = "사용자를 찾지 못함")
     USER_NOT_FOUND,
