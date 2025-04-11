@@ -35,11 +35,4 @@ public class UserService {
         userRepository.save(user);
     }
 
-
-//사용자 조회 (로그인 로직에서 사용)
-
-    public User findByUserName(String userName) {
-        return userRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을수 없습니다."));
-    }
 }
