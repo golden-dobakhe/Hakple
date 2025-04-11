@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.domain.post.comment.entity;
+package com.golden_dobakhe.HakPle.domain.post.comment.comment.entity;
 
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;

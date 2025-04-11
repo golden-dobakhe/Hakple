@@ -1,9 +1,9 @@
-package com.golden_dobakhe.HakPle.domain.post.comment.service;
+package com.golden_dobakhe.HakPle.domain.post.comment.comment.service;
 
-import com.golden_dobakhe.HakPle.domain.post.comment.CommentDeleteResult;
-import com.golden_dobakhe.HakPle.domain.post.comment.dto.CommentRequestDto;
-import com.golden_dobakhe.HakPle.domain.post.comment.entity.Comment;
-import com.golden_dobakhe.HakPle.domain.post.comment.repository.CommentRepository;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.CommentDeleteResult;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentRequestDto;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentRepository;
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
 import com.golden_dobakhe.HakPle.domain.post.post.repository.BoardRepository;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;

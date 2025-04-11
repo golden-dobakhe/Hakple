@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.domain.post.comment;
+package com.golden_dobakhe.HakPle.domain.post.comment.comment;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

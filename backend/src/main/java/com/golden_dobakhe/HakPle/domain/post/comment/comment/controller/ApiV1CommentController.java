@@ -1,8 +1,8 @@
-package com.golden_dobakhe.HakPle.domain.post.comment.controller;
+package com.golden_dobakhe.HakPle.domain.post.comment.comment.controller;
 
-import com.golden_dobakhe.HakPle.domain.post.comment.CommentDeleteResult;
-import com.golden_dobakhe.HakPle.domain.post.comment.dto.CommentRequestDto;
-import com.golden_dobakhe.HakPle.domain.post.comment.service.CommentService;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.CommentDeleteResult;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentRequestDto;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
