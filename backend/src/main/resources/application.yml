@@ -51,3 +51,8 @@ custom:
     cookieDomain: "${custom.dev.cookieDomain}"
     frontUrl: "${custom.dev.frontUrl}"
     backUrl: "${custom.dev.backUrl}"
+
+#일단 임시로 지정함
+jwt:
+  secretKey: 127393911531540290533352supercalifragilisticexpialidocious
+  refreshKey: 127393911531540290533352supercalifragilisticexpialidocious
