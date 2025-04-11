@@ -30,6 +30,7 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 	implementation ("org.springframework.boot:spring-boot-starter-security") //security
+	implementation ("org.springframework.boot:spring-boot-starter-validation")  //검증
 
 
 }

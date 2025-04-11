@@ -9,6 +9,7 @@ import com.golden_dobakhe.HakPle.domain.post.post.repository.*;
 import com.golden_dobakhe.HakPle.domain.post.post.service.BoardService;
 
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.entity.Status;
 
 import lombok.RequiredArgsConstructor;

@@ -7,6 +7,7 @@ import com.golden_dobakhe.HakPle.domain.post.comment.repository.CommentRepositor
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
 import com.golden_dobakhe.HakPle.domain.post.post.repository.BoardRepository;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.entity.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
