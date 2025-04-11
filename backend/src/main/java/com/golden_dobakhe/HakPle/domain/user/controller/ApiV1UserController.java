@@ -15,17 +15,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiV1UserController {
     private final UserService userService;
 
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
-    }
-
-    @PostMapping("/userreg")
-    public String register(UserDTO userDTO) {
-        userService.register(userDTO); // 서비스 호출
-
-        // 회원가입 후 리다이렉트할 페이지 (예: 로그인 페이지나 완료 페이지)
-        return "redirect:/api/v1/users/signup-success";
-    }
 
 }
