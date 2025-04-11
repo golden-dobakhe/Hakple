@@ -41,15 +41,17 @@ public class Board extends BaseEntity {
     private String academyCode; // 학원 코드
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default  // 🔥 필드 초기화 강제
     private List<BoardLike> boardLikes = new ArrayList<>(); //  좋아요 수
 
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default  // 🔥 필드 초기화 강제
     private List<TagMapping> tags = new ArrayList<>(); // 태그 매핑 리스트
 
 
     public void increaseViewCount() {
-        this.viewCount++;
+        this.viewCount = this.viewCount + 1;
     }
 
     public void update(String title, String content) {

@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+@Builder
 @ToString
 public class BoardLike extends BaseEntity {
     @ManyToOne(optional = false)

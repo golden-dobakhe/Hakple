@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+@Builder
 @ToString
 public class TagMapping extends BaseEntity { // BaseEntity 상속으로 공통 필드 포함
     @ManyToOne(optional = false)

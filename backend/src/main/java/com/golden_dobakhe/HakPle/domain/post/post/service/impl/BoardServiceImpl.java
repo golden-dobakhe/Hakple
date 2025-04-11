@@ -47,6 +47,7 @@ public class BoardServiceImpl implements BoardService {
                 .academyCode(request.getAcademyCode())
                 .user(user)
                 .status(Status.ACTIVE)
+                .modificationTime(null)
                 .build();
 
         board = boardRepository.save(board);
@@ -66,6 +67,9 @@ public class BoardServiceImpl implements BoardService {
                         .hashtag(hashtag)
                         .build();
 
+                board.getTags().add(tagMapping);
+
+
                 tagMappingRepository.save(tagMapping);
             }
         }
@@ -74,7 +78,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public BoardResponse getBoard(Long id) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> BoardException.notFound());
@@ -209,9 +213,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     private BoardResponse createBoardResponse(Board board) {
+        System.out.println("1");
         List<String> tags = board.getTags().stream()
                 .map(tagMapping -> tagMapping.getHashtag().getHashtagName())
                 .collect(Collectors.toList());
+
+        System.out.println("2");
 
         return BoardResponse.builder()
                 .board(board)
