@@ -20,7 +20,7 @@ public class UserService {
     public void register(UserDTO userDTO) {
         // 사용자 이름 중복 확인
         if (userRepository.existsByUserName(userDTO.getUserName())) {
-            throw new IllegalArgumentException("Username already exists!");
+            throw new IllegalArgumentException("사용자 이름이 이미 존재합니다.");
         }
 
         // User 엔티티로 변환 및 저장
@@ -40,6 +40,6 @@ public class UserService {
 
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalArgumentException("User not found!"));
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을수 없습니다."));
     }
 }

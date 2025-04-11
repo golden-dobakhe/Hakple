@@ -10,14 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@Controller
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
 public class ApiV1UserController {
     private final UserService userService;
 
-
-    //회원가입폼 요청
     @GetMapping("/signup")
     public String signup() {
         return "signup";
