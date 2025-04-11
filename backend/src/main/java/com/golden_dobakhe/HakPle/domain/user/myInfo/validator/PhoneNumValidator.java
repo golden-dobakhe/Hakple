@@ -3,7 +3,7 @@ package com.golden_dobakhe.HakPle.domain.user.myInfo.validator;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.repository.MyInfoRepository;
 
 public class PhoneNumValidator {
-    private static final String PHONE_REGEX = "^\\d{11}$";
+    private static final String PHONE_REGEX = "^\\d{10,11}$";
 
     public static void validatePhoneNum(String newPhoneNum, String currentPhoneNum, MyInfoRepository myInfoRepository) {
         if (newPhoneNum == null || newPhoneNum.isBlank()) {
@@ -15,7 +15,7 @@ public class PhoneNumValidator {
         }
 
         if (!newPhoneNum.matches(PHONE_REGEX)) {
-            throw new IllegalArgumentException("전화번호는 숫자만 포함한 11자리여야 합니다. 예: 01012345678");
+            throw new IllegalArgumentException("전화번호는 숫자만 포함하며, 10~11자리여야 합니다.");
         }
 
         if (myInfoRepository.existsByPhoneNum(newPhoneNum)) {
