@@ -41,6 +41,9 @@ public class User extends BaseEntity {
 
     @Column(length = 100)
     private String academyId;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "academy_id")
+//    private Academy academy;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
