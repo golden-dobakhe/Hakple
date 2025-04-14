@@ -22,5 +22,6 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse("서버 오류가 발생했습니다."));
     }
 
-    public record ErrorResponse(String message) {}
+    public record ErrorResponse(String message) {
+    }
 }

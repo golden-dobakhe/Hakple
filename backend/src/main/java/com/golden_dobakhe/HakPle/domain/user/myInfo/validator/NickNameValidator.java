@@ -1,11 +1,12 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.validator;
 
-import com.golden_dobakhe.HakPle.domain.user.myInfo.repository.MyInfoRepository;
+
+import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
 
 public class NickNameValidator {
     private static final String NICKNAME_REGEX = "^[a-zA-Z가-힣0-9_.-]{2,20}$";
 
-    public static void validateNickName(String newNickName, String currentNickName, MyInfoRepository myInfoRepository) {
+    public static void validateNickName(String newNickName, String currentNickName, UserRepository userRepository) {
         if (newNickName == null || newNickName.isBlank()) {
             throw new IllegalArgumentException("닉네임은 필수입니다.");
         }
@@ -18,7 +19,7 @@ public class NickNameValidator {
             throw new IllegalArgumentException("닉네임은 한글/영문 2~20자, 공백 없이 특수 기호는 _, -, . 만 사용 가능합니다.");
         }
 
-        if (myInfoRepository.existsByNickName(newNickName)) {
+        if (userRepository.existsByNickName(newNickName)) {
             throw new IllegalArgumentException("이미 사용 중인 닉네임입니다.");
         }
     }
