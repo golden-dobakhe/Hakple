@@ -73,15 +73,15 @@ jobs:
           echo "comment=$COMMENT" >> $GITHUB_OUTPUT
 
       # 줄 리뷰 코멘트 시도 (실패해도 계속 진행)
-      - name: Add Pull Request Review Comment
-        if: env.EVENT_TYPE == 'pull_request'
-        continue-on-error: true
-        uses: nbaztec/add-pr-review-comment@v1.0.7
-        with:
-          comments: ${{ steps.store.outputs.comment }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: 'github-actions[bot]'
-          allow-repeats: false
+      # - name: Add Pull Request Review Comment
+      #   if: env.EVENT_TYPE == 'pull_request'
+      #   continue-on-error: true
+      #   uses: nbaztec/add-pr-review-comment@v1.0.7
+      #   with:
+      #     comments: ${{ steps.store.outputs.comment }}
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+      #     repo-token-user-login: 'github-actions[bot]'
+      #     allow-repeats: false
 
       # 줄 리뷰 실패 or push 이벤트 → fallback 전체 리뷰 코멘트 추가
       - name: Fallback Gemini Review PR Comment
