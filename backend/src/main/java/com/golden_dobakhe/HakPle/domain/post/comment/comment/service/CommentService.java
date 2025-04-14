@@ -93,4 +93,6 @@ public class CommentService {
         }
     }
 
+    //댓글 신고
+
 }
