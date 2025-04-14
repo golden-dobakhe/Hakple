@@ -3,8 +3,17 @@ package com.golden_dobakhe.HakPle.domain.user.entity;
 import com.golden_dobakhe.HakPle.domain.resource.image.entity.Image;
 import com.golden_dobakhe.HakPle.global.entity.BaseEntity;
 import com.golden_dobakhe.HakPle.global.entity.Status;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Getter
@@ -30,8 +39,11 @@ public class User extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String phoneNum;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String academyId;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "academy_id")
+//    private Academy academy;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

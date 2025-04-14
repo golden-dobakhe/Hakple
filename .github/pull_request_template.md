@@ -1,12 +1,3 @@
----
-name: Feature request_v1
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
----
-
 ## 📒 개요
 <!-- 내용을 적어주세요. -->
 
