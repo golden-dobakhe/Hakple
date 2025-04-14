@@ -29,18 +29,16 @@ public class LikeService {
     private final UserRepository userRepository;
 
     //좋아요 +
-    public CommentResult likeComment(Long commentId) {
+    public CommentResult likeComment(Long commentId,User user) {
 
         Comment comment=commentRepository.findById(commentId).orElse(null);
         if(comment==null){
-            return CommentResult.COMMENT_NOT_FOUND;
+            throw new CommentException(CommentResult.COMMENT_NOT_FOUND);
         }
-        User user = User.builder().id(1L).build(); //임의로 만든 유저
-        Long userId = user.getId();
 
-        Optional<CommentLike> existingLike = likeRepository.findByCommentIdAndUserId(commentId, userId);
+        Optional<CommentLike> existingLike = likeRepository.findByCommentIdAndUserId(commentId, user.getId());
         if (existingLike.isPresent()) { //이미 같은 댓글에 좋아요를 눌렀으면
-            return CommentResult.ALREADY_LIKED;
+            throw new CommentException(CommentResult.ALREADY_LIKED);
         }
         comment.setLikeCount(comment.getLikeCount()+1);
         CommentLike commentLike = CommentLike.builder()
@@ -55,7 +53,7 @@ public class LikeService {
 
 
     //댓글 당 좋아요 수
-    public int likeConut(Long commentId) {
+    public int likeCount(Long commentId) {
         Comment comment=commentRepository.findById(commentId).orElse(null);
         if(comment==null) {
             throw new CommentException(CommentResult.COMMENT_NOT_FOUND);

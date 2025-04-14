@@ -63,4 +63,6 @@ dockerCompose {
 tasks.named("bootRun") {
     finalizedBy("dockerComposeDown") // bootRun 작업 종료 후 dockerComposeDown 실행
 }
-
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-parameters")
+}
