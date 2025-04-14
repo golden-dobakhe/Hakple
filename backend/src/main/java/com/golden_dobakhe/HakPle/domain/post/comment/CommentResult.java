@@ -9,6 +9,7 @@ public enum CommentResult {
     UNAUTHORIZED("권한 없음"),
     EMPTY("댓글 내용이 비어 있음"),
     SUCCESS("성공적으로 처리됨"),
+    NOT_LIKED_YET("아직 좋아요 누르지 않았음"),
     ALREADY_LIKED("이미 좋아요 누름");
 
     @Getter

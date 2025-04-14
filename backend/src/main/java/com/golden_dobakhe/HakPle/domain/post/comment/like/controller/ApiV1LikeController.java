@@ -66,4 +66,16 @@ public class ApiV1LikeController {
         User user = principal.getUser();
         return ResponseEntity.ok(likeService.countUserLikedComments(user.getId()));
     }
+
+    @DeleteMapping("/comments/{commentId}")
+    @Operation(summary = "댓글 좋아요 취소", description = "이미 좋아요 누른 댓글만 취소 가능")
+    public ResponseEntity<CommentResult> unlikeComment(
+            @PathVariable(name ="commentId") Long commentId,
+            @AuthenticationPrincipal CustomUserDetails principal
+    ) {
+        User user = principal.getUser();
+        CommentResult result = likeService.unlikeComment(commentId, user);
+        return ResponseEntity.ok(result);
+    }
+
 }

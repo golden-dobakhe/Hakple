@@ -50,6 +50,21 @@ public class LikeService {
     }
 
     //좋아요 -
+    public CommentResult unlikeComment(Long commentId, User user) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new CommentException(CommentResult.COMMENT_NOT_FOUND));
+
+        // ✅ 이미 좋아요 했는지 체크
+        CommentLike like = likeRepository.findByCommentIdAndUserId(commentId, user.getId())
+                .orElseThrow(() -> new CommentException(CommentResult.NOT_LIKED_YET));
+
+        // ✅ 좋아요 취소 (delete)
+        likeRepository.delete(like);
+        comment.setLikeCount(comment.getLikeCount()-1);
+
+        return CommentResult.SUCCESS;
+    }
+
 
 
     //댓글 당 좋아요 수
