@@ -16,16 +16,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // 회원가입 로직
+    // 회원가입 로직 (중복 확인 포함)
     public void register(UserDTO userDTO) {
         // 사용자 이름 중복 확인
-        if (usernameFail(userDTO.getUserName())) {
-            throw new IllegalArgumentException("사용자 이름이 이미 존재합니다.");
+        if (userRepository.existsByUserName(userDTO.getUserName())) {
+            throw new IllegalArgumentException("아이디가 이미 사용 중입니다.");
         }
 
         // 닉네임 중복 확인
-        if (nicknameFail(userDTO.getNickName())) {
-            throw new IllegalArgumentException("닉네임이 이미 존재합니다.");
+        if (userRepository.existsByNickName(userDTO.getNickName())) {
+            throw new IllegalArgumentException("닉네임이 이미 사용 중입니다.");
         }
 
         // User 엔티티로 변환 및 저장
@@ -38,15 +38,5 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
-    }
-
-    // 아이디 중복 확인
-    public boolean usernameFail(String userName) {
-        return userRepository.existsByUserName(userName);
-    }
-
-    // 닉네임 중복 확인
-    public boolean nicknameFail(String nickName) {
-        return userRepository.existsByNickName(nickName);
     }
 }

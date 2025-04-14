@@ -27,14 +27,6 @@ public class ApiV1UserController {
             );
         }
 
-        // 아이디와 닉네임 중복 확인
-        if (userService.usernameFail(userDTO.getUserName())) {
-            return ResponseEntity.badRequest().body("아이디가 이미 사용 중입니다.");
-        }
-
-        if (userService.nicknameFail(userDTO.getNickName())) {
-            return ResponseEntity.badRequest().body("닉네임이 이미 사용 중입니다.");
-        }
 
         // 회원가입 처리
         userService.register(userDTO);
