@@ -16,9 +16,11 @@ public class ApiV1UsernameController {
 
     //아이디 찾기
     @GetMapping("/find-username")
-    public ResponseEntity<String> findUserName(@RequestParam String nickName, String phoneNum) {
+    public ResponseEntity<String> findUserName(
+            @RequestParam(name = "nickName") String nickName,
+            @RequestParam(name = "phoneNum") String phoneNum) {
         try {
-            String userName = usernameService.findUserNameByPhoneNum(nickName,phoneNum);
+            String userName = usernameService.findUserNameByPhoneNum(nickName, phoneNum);
             return ResponseEntity.ok("회원님의 아이디는: " + userName + " 입니다.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
