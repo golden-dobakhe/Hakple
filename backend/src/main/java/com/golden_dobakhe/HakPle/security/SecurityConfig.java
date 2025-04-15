@@ -43,7 +43,6 @@ public class SecurityConfig {
                                 "/webjars/**"                // Swagger static
                                          ).permitAll()
                         .anyRequest().authenticated())
-
                 .sessionManagement(session -> session
                         //세션을 저장하지 않는다 -> 세션을 사용하지 않겠다는 뜻 jwt인증을 쓸거니까
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
