@@ -41,7 +41,7 @@ public class FakeAuthenticationFilter extends OncePerRequestFilter {
                             .academyId("ACADEMY001")
                             .build()));
 
-            CustomUserDetails principal = new CustomUserDetails(fakeUser);
+            AnotherCustomUserDetails principal = new AnotherCustomUserDetails(fakeUser);
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
 

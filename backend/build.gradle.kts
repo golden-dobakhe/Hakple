@@ -49,6 +49,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
+	// Oauth2
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
 }
 
 // Docker Compose 설정 (정상 작동되는 버전)
@@ -64,7 +67,6 @@ dockerCompose {
 // bootRun 작업 종료 시 Docker Compose 정리
 tasks.named("bootRun") {
     finalizedBy("dockerComposeDown") // bootRun 작업 종료 후 dockerComposeDown 실행
-
 }
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")

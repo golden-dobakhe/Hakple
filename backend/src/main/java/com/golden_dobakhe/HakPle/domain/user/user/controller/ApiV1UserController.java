@@ -4,7 +4,7 @@ import com.golden_dobakhe.HakPle.domain.user.user.dto.ChangePasswordRequest;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.ResetPasswordRequest;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.UserDTO;
 import com.golden_dobakhe.HakPle.domain.user.user.service.UserService;
-import com.golden_dobakhe.HakPle.security.CustomUserDetails;
+import com.golden_dobakhe.HakPle.security.CustomUserDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,7 +44,7 @@ public class ApiV1UserController {
     @Operation(summary = "비밀번호 변경", description = "로그인된 사용자가 현재 비밀번호를 확인하고 새 비밀번호로 변경합니다.")
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(
-            @AuthenticationPrincipal CustomUserDetails principal,
+            @AuthenticationPrincipal CustomUserDetailsService.CustomUserDetails principal,
             @RequestBody @Valid ChangePasswordRequest request
     ) {
         userService.changePasswordWithOldPassword(
@@ -60,7 +60,7 @@ public class ApiV1UserController {
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(
             @Parameter(description = "사용자 ID", example = "1")
-            @AuthenticationPrincipal CustomUserDetails principal,
+            @AuthenticationPrincipal CustomUserDetailsService.CustomUserDetails principal,
             @RequestBody @Valid ResetPasswordRequest request
     ) {
         userService.resetPassword(

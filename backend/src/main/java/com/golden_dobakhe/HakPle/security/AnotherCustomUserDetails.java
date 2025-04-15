@@ -1,5 +1,8 @@
 package com.golden_dobakhe.HakPle.security;
 
+//userdetails에 대하여 2가지로 나뉘어서 일단 합치가 보단 2개를 병렬 시켜놓고 이따 합쳐보는걸로
+
+
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,11 +12,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Getter
-public class CustomUserDetails implements UserDetails {
-
+public class AnotherCustomUserDetails implements UserDetails {
     private final User user;
 
-    public CustomUserDetails(User user) {
+    public AnotherCustomUserDetails(User user) {
         this.user = user;
     }
 
