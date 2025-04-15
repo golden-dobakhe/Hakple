@@ -1,6 +1,8 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.service;
 
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.dto.MyInfoResponseDto;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.dto.MyInfoUpdateRequestDto;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.validator.NickNameValidator;
@@ -18,7 +20,7 @@ public class MyInfoService {
     //사용자 정보 가져오기
     public MyInfoResponseDto getMyInfo(String userName) {
         User user = userRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new UserException(UserErrorCode.USERNAME_NOT_FOUND));
 
         return MyInfoResponseDto.builder()
                 .nickname(user.getNickName())
@@ -33,7 +35,7 @@ public class MyInfoService {
     @Transactional
     public void updateMyInfo(String userName, MyInfoUpdateRequestDto requestDto) {
         User user = userRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new UserException(UserErrorCode.USERNAME_NOT_FOUND));
 
         //nickName 변경
         String newNickName = requestDto.getNickName();

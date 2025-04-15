@@ -1,6 +1,8 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.validator;
 
 
+import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoException;
 import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
 
 public class NickNameValidator {
@@ -8,19 +10,19 @@ public class NickNameValidator {
 
     public static void validateNickName(String newNickName, String currentNickName, UserRepository userRepository) {
         if (newNickName == null || newNickName.isBlank()) {
-            throw new IllegalArgumentException("닉네임은 필수입니다.");
+            throw new MyInfoException(MyInfoErrorCode.REQUIRED);
         }
 
         if (newNickName.equals(currentNickName)) {
-            throw new IllegalArgumentException("기존 닉네임과 동일합니다.");
+            throw new MyInfoException(MyInfoErrorCode.SAME_AS_CURRENT);
         }
 
         if (!newNickName.matches(NICKNAME_REGEX)) {
-            throw new IllegalArgumentException("닉네임은 한글/영문 2~20자, 공백 없이 특수 기호는 _, -, . 만 사용 가능합니다.");
+            throw new MyInfoException(MyInfoErrorCode.NICKNAME_INVALID);
         }
 
         if (userRepository.existsByNickName(newNickName)) {
-            throw new IllegalArgumentException("이미 사용 중인 닉네임입니다.");
+            throw new MyInfoException(MyInfoErrorCode.NICKNAME_DUPLICATE);
         }
     }
 }

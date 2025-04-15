@@ -1,6 +1,8 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.validator;
 
 
+import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoException;
 import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
 
 public class PhoneNumValidator {
@@ -8,19 +10,19 @@ public class PhoneNumValidator {
 
     public static void validatePhoneNum(String newPhoneNum, String currentPhoneNum, UserRepository userRepository) {
         if (newPhoneNum == null || newPhoneNum.isBlank()) {
-            throw new IllegalArgumentException("전화번호는 필수 항목입니다.");
+            throw new MyInfoException(MyInfoErrorCode.REQUIRED);
         }
 
         if (newPhoneNum.equals(currentPhoneNum)) {
-            throw new IllegalArgumentException("기존 전화번호와 동일합니다.");
+            throw new MyInfoException(MyInfoErrorCode.SAME_AS_CURRENT);
         }
 
         if (!newPhoneNum.matches(PHONE_REGEX)) {
-            throw new IllegalArgumentException("전화번호는 숫자만 포함하며, 10~11자리여야 합니다.");
+            throw new MyInfoException(MyInfoErrorCode.PHONENUM_INVALID);
         }
 
         if (userRepository.existsByPhoneNum(newPhoneNum)) {
-            throw new IllegalArgumentException("이미 사용 중인 전화번호입니다.");
+            throw new MyInfoException(MyInfoErrorCode.PHONENUM_DUPLICATE);
         }
     }
 }

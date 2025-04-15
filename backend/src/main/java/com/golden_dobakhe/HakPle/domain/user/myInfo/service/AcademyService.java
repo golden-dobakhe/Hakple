@@ -2,7 +2,8 @@ package com.golden_dobakhe.HakPle.domain.user.myInfo.service;
 
 import com.golden_dobakhe.HakPle.domain.user.entity.Academy;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.myInfo.util.AcademyCodeParser;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.validator.AcademyCodeValidator;
 import com.golden_dobakhe.HakPle.domain.user.repository.AcademyRepository;
 import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
@@ -19,21 +20,21 @@ public class AcademyService {
 
     @Transactional
     public String registerAcademy(String userName, String academyCode) {
-        // 1. 유효성 검사
+        // 유효성 검사
         AcademyCodeValidator.validateAcademyId(academyCode);
 
-        // 2. 전화번호 뒷자리 추출
-        String phoneSuffix = AcademyCodeParser.extractPhoneSuffix(academyCode);
+        // 전화번호 뒷자리 추출
+        String phoneSuffix = academyCode.substring(3, 7);
 
-        // 3. 학원 찾기
+        // 학원 찾기
         Optional<Academy> academyOpt = academyRepository.findByPhoneNumEndsWith(phoneSuffix);
-        Academy academy = academyOpt.orElseThrow(() -> new IllegalArgumentException("해당 학원 코드를 가진 학원을 찾을 수 없습니다."));
+        Academy academy = academyOpt.orElseThrow(() -> new UserException(UserErrorCode.ACADEMYID_NOT_FOUND));
 
-        // 4. 사용자 찾기
+        // 사용자 찾기
         User user = userRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new UserException(UserErrorCode.USERNAME_NOT_FOUND));
 
-        // 5. 학원코드 저장
+        // 학원코드 저장
         user.setAcademyId(academyCode);
 
         return academy.getAcademyName();
