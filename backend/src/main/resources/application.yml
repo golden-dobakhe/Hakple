@@ -23,11 +23,17 @@ spring:
         format_sql: true
         highlight_sql: true
         use_sql_comments: true
-
+  config:
+    import:
+      - classpath:application-secret.yml
   docker:
     compose:
       file: docker-compose.yml  # 파일 경로 명시
       lifecycle-management: start-and-stop # Docker Compose 라이프사이클 관리 활성화
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 logging:
   level:
