@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import com.golden_dobakhe.HakPle.global.entity.Status;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 
+//user객체만 가져오는 방식이랑 원하는 부분만 가져오는 방식에서 문제가 생겨서 이렇게 나누었습니다
 @Getter
 public class CustomUserDetails implements UserDetails {
     private final String username;
@@ -25,7 +27,6 @@ public class CustomUserDetails implements UserDetails {
         this.nickname = nickname;
         this.status = status;
         this.authorities = roles;
-
     }
 
     @Override
@@ -36,11 +37,19 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getPassword() {
         return "";
+
     }
 
     @Override
     public String getUsername() {
+
         return this.username; // 유저 이름
+
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
     @Override

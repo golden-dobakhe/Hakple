@@ -39,7 +39,6 @@ out/
 
 ### Custom ###
 application-secret.yml
-db.dev.*
 
 ### terraform ###
 .terraform

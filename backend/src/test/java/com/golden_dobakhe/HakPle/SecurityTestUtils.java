@@ -10,6 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class SecurityTestUtils {
     public static void setAuthentication(User user) {
         AnotherCustomUserDetails principal = new AnotherCustomUserDetails(user);
+// =======
+//         CustomUserDetails principal = new CustomUserDetails(user);
+// >>>>>>> develop
         Authentication auth = new UsernamePasswordAuthenticationToken(
                 principal,
                 null,

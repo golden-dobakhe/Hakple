@@ -1,14 +1,14 @@
 package com.golden_dobakhe.HakPle.security;
 
+
 import com.golden_dobakhe.HakPle.security.jwt.JwtAuthFilter;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,9 +19,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
-
-import org.springframework.security.web.SecurityFilterChain;
-
 
 @Configuration
 @Slf4j
@@ -58,27 +55,38 @@ public class SecurityConfig {
         security
                 .formLogin(form -> form.disable()
                 );
+      //문제가 생기면 .anyRequest().permitAll() // 🔓 모든 요청 허용로 일단은 바꿔보고 해보세요, 필터는 jwt로 바꾸었습니다
+      //아래에 있던 필터가 필요하면 말씀부탁드립니다
+// =======
 
+//     private final FakeAuthenticationFilter fakeAuthenticationFilter;
+//     @Bean
+//     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//         http
+//             .csrf(csrf -> csrf.disable())
+//             .authorizeHttpRequests(auth -> auth
+//                 .anyRequest().permitAll() // 🔓 모든 요청 허용
+//             )
+//             .addFilterBefore(fakeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // ✅ 필터 추가
+//             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//             .httpBasic(httpBasic -> httpBasic.disable())
+//             .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
+//         return http.build();
+// >>>>>>> develop
+        return security.build();
 
-
-        return  security.build();
     }
 
-    //cors에 대한 설정
-    //요청이 들어오면 어디까지 허용할꺼냐
     @Bean
-    public CorsConfigurationSource corsConfigurationSource(){
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        //혀용을 어디까지 허용할꺼냐를 설정한다
-        //헤더, 메서드, 오리진 HTTP메서드...
-        config.addAllowedOrigin("*"); //origin는 naver,goole,localhost같은거
-        config.addAllowedHeader("*"); //베어러는 여기에 포함된다
-        config.addAllowedMethod("*");
-        config.setAllowedMethods(List.of("GET","POST","DELETE"));
-        //그리고 그걸 적용할 url에 내가 설정한 부분을 적용시킬거라고 한다
-        source.registerCorsConfiguration("/**",config);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
 
@@ -87,3 +95,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
