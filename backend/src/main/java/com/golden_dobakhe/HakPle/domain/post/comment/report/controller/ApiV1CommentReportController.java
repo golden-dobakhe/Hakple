@@ -1,6 +1,7 @@
 package com.golden_dobakhe.HakPle.domain.post.comment.report.controller;
 
 import com.golden_dobakhe.HakPle.domain.post.comment.report.service.CommentReportService;
+import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
 import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class ApiV1CommentReportController {
     @PostMapping("/{commentId}")
     public ResponseEntity<?> reportComment(
             @PathVariable(name = "commentId") Long commentId,
-            @AuthenticationPrincipal CustomUserDetails principal
+            @AuthenticationPrincipal AnotherCustomUserDetails principal
     ) {
         commentReportService.reportComment(commentId, principal.getUser().getId());
         return ResponseEntity.ok("댓글이 신고되었습니다.");

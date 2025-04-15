@@ -1,46 +1,45 @@
 package com.golden_dobakhe.HakPle.security;
 
+//userdetails에 대하여 2가지로 나뉘어서 일단 합치가 보단 2개를 병렬 시켜놓고 이따 합쳐보는걸로
+
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
-
 import lombok.Getter;
-
-import com.golden_dobakhe.HakPle.global.entity.Status;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-
 @Getter
-public class CustomUserDetails implements UserDetails {
-    private final String username;
-    private final String nickname;
-    private final Status status;
-    private final List<GrantedAuthority> authorities;
+public class AnotherCustomUserDetails implements UserDetails {
+    private final User user;
 
-    public CustomUserDetails(String username, String nickname, Status status, List<GrantedAuthority> roles) {
-        this.username = username;
-        this.nickname = nickname;
-        this.status = status;
-        this.authorities = roles;
+    public AnotherCustomUserDetails(User user) {
+        this.user = user;
+    }
 
+    public Long getUserId() {
+        return user.getId();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return List.of(); // 권한 없음
     }
 
     @Override
     public String getPassword() {
-        return "";
+        return user.getPassword(); // 비밀번호 (암호화된 상태)
     }
 
     @Override
     public String getUsername() {
-        return this.username; // 유저 이름
+        return user.getUserName(); // 유저 이름
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
     @Override
