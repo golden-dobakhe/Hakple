@@ -1,11 +1,10 @@
-package com.golden_dobakhe.HakPle.domain.user.controller;
+package com.golden_dobakhe.HakPle.domain.user.user.controller;
 
-import com.golden_dobakhe.HakPle.domain.user.dto.UserDTO;
-import com.golden_dobakhe.HakPle.domain.user.service.UserService;
+import com.golden_dobakhe.HakPle.domain.user.user.dto.UserDTO;
+import com.golden_dobakhe.HakPle.domain.user.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 

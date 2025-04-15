@@ -1,7 +1,7 @@
 package com.golden_dobakhe.HakPle.security;
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

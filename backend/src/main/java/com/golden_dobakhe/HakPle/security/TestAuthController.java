@@ -1,6 +1,6 @@
 package com.golden_dobakhe.HakPle.security;
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.security.dto.LoginDto;
 import com.golden_dobakhe.HakPle.security.dto.LoginResponseDto;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;

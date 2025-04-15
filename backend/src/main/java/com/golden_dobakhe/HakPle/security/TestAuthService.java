@@ -1,7 +1,7 @@
 package com.golden_dobakhe.HakPle.security;
 //이 부분은 테스트를 위한 것이며 추후 어딘가에 병합이 될 수 있음
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.security.dto.LoginDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

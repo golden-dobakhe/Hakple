@@ -2,8 +2,8 @@ package com.golden_dobakhe.HakPle.security;
 
 
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.entity.Status;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

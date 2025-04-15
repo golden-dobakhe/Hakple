@@ -1,7 +1,7 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.service;
 
-import com.golden_dobakhe.HakPle.domain.user.entity.Academy;
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.Academy;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.repository.AcademyRepository;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.repository.MyInfoRepository;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.util.AcademyCodeParser;

@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.domain.user.dto;
+package com.golden_dobakhe.HakPle.domain.user.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

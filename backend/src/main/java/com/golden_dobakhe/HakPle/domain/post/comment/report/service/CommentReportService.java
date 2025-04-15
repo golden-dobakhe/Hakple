@@ -6,8 +6,8 @@ import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentR
 import com.golden_dobakhe.HakPle.domain.post.comment.exception.CommentException;
 import com.golden_dobakhe.HakPle.domain.post.comment.report.entity.CommentReport;
 import com.golden_dobakhe.HakPle.domain.post.comment.report.repository.CommentReportRepository;
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
