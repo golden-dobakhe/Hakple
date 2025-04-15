@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.domain.user.myInfo.repository;
+package com.golden_dobakhe.HakPle.domain.user.repository;
 
 import com.golden_dobakhe.HakPle.domain.user.entity.Academy;
 import java.util.Optional;

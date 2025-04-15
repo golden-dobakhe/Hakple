@@ -4,6 +4,7 @@ import com.golden_dobakhe.HakPle.domain.user.myInfo.service.AcademyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/academies")
+@Tag(name = "Academy Controller", description = "학원 등록 관리 API")
 public class ApiV1AcademyController {
     private final AcademyService academyService;
 

@@ -16,7 +16,4 @@ public class MyInfoUpdateRequestDto { //사용자 정보 수정용
 
     @Schema(description = "수정할 전화번호", example = "01012345678")
     private String phoneNum;
-
-    @Schema(description = "등록할 학원 코드", example = "ABC1234XYZ")
-    private String academyId;
 }
