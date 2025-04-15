@@ -5,9 +5,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
     Optional<User> findByUserName(String userName);
 
-    boolean existsByNickName(String NickName);
+    boolean existsByUserName(String userName); //아이디 중복확인
 
-    boolean existsByPhoneNum(String PhoneNum);
+    boolean existsByNickName(String nickName); //닉네임 중복확인
+
+    boolean existsByPhoneNum(String phoneNum);
 }

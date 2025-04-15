@@ -1,8 +1,6 @@
 package com.golden_dobakhe.HakPle.security;
 
-//import com.golden_dobakhe.HakPle.security.filter.FakeAuthenticationFilter;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.List;
+
 @Configuration
 @Slf4j
 @RequiredArgsConstructor
@@ -27,14 +27,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // 🔓 모든 요청 허용
-                )
-                .addFilterBefore(fakeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // ✅ 필터 추가
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .httpBasic(httpBasic -> httpBasic.disable())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll() // 🔓 모든 요청 허용
+            )
+            .addFilterBefore(fakeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // ✅ 필터 추가
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .httpBasic(httpBasic -> httpBasic.disable())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         return http.build();
     }
