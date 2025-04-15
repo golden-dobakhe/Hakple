@@ -31,7 +31,7 @@ public class FakeAuthenticationFilter extends OncePerRequestFilter {
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             // DB에 저장
-            User fakeUser = userRepository.findByUserName("testuser")
+            User fakeUser = userRepository.findByUserName("testuser1")
                     .orElseGet(() -> userRepository.save(User.builder()
                             .userName("testuser")
                             .nickName("홍길동")

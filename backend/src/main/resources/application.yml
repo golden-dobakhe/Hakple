@@ -30,6 +30,7 @@ spring:
     compose:
       file: docker-compose.yml  # 파일 경로 명시
       lifecycle-management: start-and-stop # Docker Compose 라이프사이클 관리 활성화
+      enabled: true
   data:
     redis:
       host: localhost

@@ -40,7 +40,7 @@ public class User extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String phoneNum;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = true)
     private String academyId;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "academy_id")
