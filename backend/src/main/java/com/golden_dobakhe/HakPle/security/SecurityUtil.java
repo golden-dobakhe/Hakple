@@ -46,8 +46,13 @@ public class SecurityUtil {
 
         Object principal = getAuthentication().getPrincipal();
 
-        if (principal instanceof CustomUserDetails) {
-            return ((CustomUserDetails) principal).getUserId();
+
+        if (principal instanceof AnotherCustomUserDetails) {
+            return ((AnotherCustomUserDetails) principal).getUserId();
+// =======
+//         if (principal instanceof CustomUserDetails) {
+//             return ((CustomUserDetails) principal).getUserId();
+// >>>>>>> develop
         }
 
         return null;
@@ -61,8 +66,12 @@ public class SecurityUtil {
 
         Object principal = getAuthentication().getPrincipal();
 
-        if (principal instanceof CustomUserDetails) {
-            return ((CustomUserDetails) principal).getUser();
+        if (principal instanceof AnotherCustomUserDetails) {
+            return ((AnotherCustomUserDetails) principal).getUser();
+// =======
+//         if (principal instanceof CustomUserDetails) {
+//             return ((CustomUserDetails) principal).getUser();
+// >>>>>>> develop
         }
 
         return null;

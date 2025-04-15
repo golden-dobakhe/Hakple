@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
+import java.util.Collections;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -21,6 +24,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " 없어요"));
 
-        return new CustomUserDetails(user);
+      //쓰는 곳이 없어서 일단은 리턴값을 null로 했습니다
+        return null;
+
     }
 }
