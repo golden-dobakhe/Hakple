@@ -10,6 +10,7 @@ import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ public class ApiV1ProfileImageController {
 
     private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/profile";
 
-    @Operation(summary = "프로필 이미지 등록", description = "사용자가 자신의 프로필 사진을 업로드합니다.")
+    @Operation(summary = "프로필 이미지 등록/수정", description = "사용자가 자신의 프로필 사진을 업로드합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "업로드 성공"),
             @ApiResponse(responseCode = "400", description = "잘못된 요청")
@@ -39,5 +40,12 @@ public class ApiV1ProfileImageController {
         ProfileImageRequestDto dto = new ProfileImageRequestDto(userName);
         String path = profileImageService.uploadProfileImage(dto, file);
         return ResponseEntity.ok("프로필 이미지 업로드 성공: " + path);
+    }
+
+    @Operation(summary = "프로필 이미지 삭제", description = "사용자의 프로필 이미지를 삭제합니다.")
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteProfileImage(@RequestParam("userName") String userName) {
+        profileImageService.deleteProfileImage(userName);
+        return ResponseEntity.ok("프로필 이미지 삭제 성공");
     }
 }

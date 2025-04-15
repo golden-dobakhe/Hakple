@@ -23,7 +23,7 @@ public class ProfileImageService {
 
     private static final String UPLOAD_DIR = "uploads/profile/";
 
-    // 프로필 사진 등록
+    // 프로필 사진 등록, 수정
     public String uploadProfileImage(ProfileImageRequestDto dto, MultipartFile file) throws IOException {
         // 유저 조회
         User user = userRepository.findByUserName(dto.getUserName())
@@ -39,33 +39,63 @@ public class ProfileImageService {
         File uploadFolder = new File(uploadPath);
         if (!uploadFolder.exists()) {
             uploadFolder.mkdirs();
-            System.out.println("[디버그] 디렉토리 생성됨: " + uploadFolder.mkdirs());
         }
 
         // 파일 저장
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
         File destinationFile = new File(uploadFolder, fileName);
         file.transferTo(destinationFile);
-        System.out.println("[디버그] 저장할 경로: " + destinationFile.getAbsolutePath());
 
         // 이미지 DB 저장
         String relativePath = "/" + UPLOAD_DIR + fileName;
-        Image image = imageRepository.findByUser(user);
 
-        if (image != null) {
-            image.setFilePath(relativePath);
-        } else {
-            image = Image.builder()
+        Image existingImage = imageRepository.findByUser(user);
+        // 수정
+        if (existingImage != null) {
+            String oldFilePath = System.getProperty("user.dir") + existingImage.getFilePath();
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            existingImage.setFilePath(relativePath);
+            imageRepository.save(existingImage);
+        }
+        // 등록
+        else {
+            Image newImage = Image.builder()
                     .user(user)
                     .filePath(relativePath)
                     .build();
+            imageRepository.save(newImage);
+            user.setProfileImage(newImage);
+            userRepository.save(user);
         }
-        imageRepository.save(image);
 
-        user.setProfileImage(image);
+        return relativePath;
+    }
+
+    // 프로필 사진 삭제
+    public void deleteProfileImage(String userName) {
+        // 유저 조회
+        User user = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new ProfileImageException(ImageErrorCode.USER_NOT_FOUND));
+
+        Image image = imageRepository.findByUser(user);
+        if (image == null) {
+            throw new ProfileImageException(ImageErrorCode.IMAGE_NOT_FOUND);
+        }
+
+        // 파일 삭제
+        String deletePath = System.getProperty("user.dir") + image.getFilePath();
+        File file = new File(deletePath);
+        if (file.exists()) {
+            file.delete();
+        }
+
+        user.setProfileImage(null);
         userRepository.save(user);
 
-        System.out.println("[디버그] 최종 저장 경로: " + relativePath);
-        return relativePath;
+        imageRepository.delete(image);
     }
 }

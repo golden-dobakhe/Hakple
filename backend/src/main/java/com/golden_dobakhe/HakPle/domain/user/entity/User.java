@@ -3,6 +3,7 @@ package com.golden_dobakhe.HakPle.domain.user.entity;
 import com.golden_dobakhe.HakPle.domain.resource.image.entity.Image;
 import com.golden_dobakhe.HakPle.global.entity.BaseEntity;
 import com.golden_dobakhe.HakPle.global.entity.Status;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -49,7 +50,7 @@ public class User extends BaseEntity {
     @Column(length = 255)
     private String refreshToken; // JWT 리프레시 토큰
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "profile_image_id", referencedColumnName = "id")
     private Image profileImage; // 프로필 이미지 (Image 엔티티와 연결)
 }
