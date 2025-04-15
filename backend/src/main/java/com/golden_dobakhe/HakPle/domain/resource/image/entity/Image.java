@@ -32,3 +32,4 @@ public class Image extends BaseEntity {
 
     @Lob // 대용량 데이터를 매핑할 때 사용됩니다. 주로 텍스트나 바이너리 데이터를 저장할 때 사용 , TEXT 타입
     private String filePath; // 이미지 경로 (TEXT 타입)
+}
