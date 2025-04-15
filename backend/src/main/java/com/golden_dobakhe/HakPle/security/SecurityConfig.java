@@ -47,33 +47,10 @@ public class SecurityConfig {
                 //이후 요청시 헤더에 Authorization
                 .httpBasic(httpBasic -> httpBasic.disable())
                 //.oauth2Login( oauth -> oauth )
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
-
-        //security.build();
-
-        //로그인
-        security
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .formLogin(form -> form.disable()
                 );
-      //문제가 생기면 .anyRequest().permitAll() // 🔓 모든 요청 허용로 일단은 바꿔보고 해보세요, 필터는 jwt로 바꾸었습니다
-      //아래에 있던 필터가 필요하면 말씀부탁드립니다
-// =======
-
-//     private final FakeAuthenticationFilter fakeAuthenticationFilter;
-//     @Bean
-//     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//         http
-//             .csrf(csrf -> csrf.disable())
-//             .authorizeHttpRequests(auth -> auth
-//                 .anyRequest().permitAll() // 🔓 모든 요청 허용
-//             )
-//             .addFilterBefore(fakeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // ✅ 필터 추가
-//             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//             .httpBasic(httpBasic -> httpBasic.disable())
-//             .cors(cors -> cors.configurationSource(corsConfigurationSource()));
-
-//         return http.build();
-// >>>>>>> develop
+        //문제가 생기면 .anyRequest().permitAll() // 🔓 모든 요청 허용로 일단은 바꿔보고 해보세요, 필터는 jwt로 바꾸었습니다
         return security.build();
 
     }

@@ -2,10 +2,9 @@ package com.golden_dobakhe.HakPle.security.jwt;
 
 //시큐리티에게 jwt를 넘겨주기 위한 필터
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
+
 import com.golden_dobakhe.HakPle.global.entity.Status;
 import com.golden_dobakhe.HakPle.security.CustomUserDetailsService;
-import com.nimbusds.oauth2.sdk.auth.JWTAuthentication;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

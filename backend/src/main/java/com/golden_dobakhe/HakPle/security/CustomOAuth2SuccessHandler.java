@@ -1,8 +1,7 @@
 package com.golden_dobakhe.HakPle.security;
 
 
-
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.security.service.TestAuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
