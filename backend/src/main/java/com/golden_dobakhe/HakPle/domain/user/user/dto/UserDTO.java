@@ -39,4 +39,5 @@ public class UserDTO {
     @Size(min = 8, max = 15, message = "비밀번호는 최소 8자 이상 15자까지 입력 가능합니다.")
     @Schema(description = "비밀번호 (8~15자)", example = "password123!")
     private String password;
+
 }

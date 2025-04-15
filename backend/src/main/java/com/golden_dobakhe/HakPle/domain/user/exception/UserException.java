@@ -1,13 +1,10 @@
-package com.golden_dobakhe.HakPle.domain.user.user.exception;
-
-
-import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+package com.golden_dobakhe.HakPle.domain.user.exception;
 
 public class UserException extends RuntimeException {
     private final UserErrorCode errorCode;
 
     public UserException(UserErrorCode errorCode) {
-        super(errorCode.name());
+        super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
 
