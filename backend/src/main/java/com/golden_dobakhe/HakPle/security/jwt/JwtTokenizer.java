@@ -21,6 +21,7 @@ public class JwtTokenizer {
     public static Long REFRESH_TOKEN_EXPIRE_COUNT=7*24*60*60*1000L; //이건 일주일
 
     //@Value로 application.yml에 있는 환경변수값을 불러와서 생성
+    //이따가 secret에서 가져오시오
     public JwtTokenizer(@Value("${jwt.secretKey}") String accessSecret, @Value("{jwt.refreshKey}") String refreshSecret) {
         this.accessSecret = accessSecret.getBytes(StandardCharsets.UTF_8);
         this.refreshSecret = refreshSecret.getBytes(StandardCharsets.UTF_8);
@@ -33,7 +34,6 @@ public class JwtTokenizer {
         //토큰에 넣을 요소를 만들기
         Claims claims = Jwts.claims().setSubject(userName);
         claims.put("nickName", nickName);
-        claims.put("phoneNum", phoneNum);
         claims.put("status", status);
 
 
@@ -59,5 +59,31 @@ public class JwtTokenizer {
     //jwt인증에 필요한 서명만들기
     private static Key getSignKey(byte[] secretKey) {
         return Keys.hmacShaKeyFor(secretKey);
+    }
+
+    public Claims parseAccessToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignKey(accessSecret))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public Claims parseRefreshToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignKey(refreshSecret))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    //받은 토큰을 파싱
+    public Claims parseToken(String token, byte[] secretKey) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignKey(secretKey))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
     }
 }

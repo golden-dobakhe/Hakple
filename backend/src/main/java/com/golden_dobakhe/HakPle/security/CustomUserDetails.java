@@ -1,39 +1,50 @@
 package com.golden_dobakhe.HakPle.security;
 
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
+
 import lombok.Getter;
+
+import com.golden_dobakhe.HakPle.global.entity.Status;
+
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
+
+//user객체만 가져오는 방식이랑 원하는 부분만 가져오는 방식에서 문제가 생겨서 이렇게 나누었습니다
 @Getter
 public class CustomUserDetails implements UserDetails {
+    private final String username;
+    private final String nickname;
+    private final Status status;
+    private final List<GrantedAuthority> authorities;
 
-    private final User user;
-
-    public CustomUserDetails(User user) {
-        this.user = user;
-    }
-
-    public Long getUserId() {
-        return user.getId();
+    public CustomUserDetails(String username, String nickname, Status status, List<GrantedAuthority> roles) {
+        this.username = username;
+        this.nickname = nickname;
+        this.status = status;
+        this.authorities = roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(); // 권한 없음
+        return this.authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword(); // 비밀번호 (암호화된 상태)
+        return "";
+
     }
 
     @Override
     public String getUsername() {
-        return user.getUserName(); // 유저 이름
+
+        return this.username; // 유저 이름
+
     }
 
     @Override
