@@ -24,7 +24,7 @@ public class AcademyService {
         AcademyCodeValidator.validateAcademyId(academyCode);
 
         // 전화번호 뒷자리 추출
-        String phoneSuffix = academyCode.substring(3, 7);
+        String phoneSuffix = extractPhoneSuffix(academyCode);
 
         // 학원 찾기
         Optional<Academy> academyOpt = academyRepository.findByPhoneNumEndsWith(phoneSuffix);
@@ -38,5 +38,9 @@ public class AcademyService {
         user.setAcademyId(academyCode);
 
         return academy.getAcademyName();
+    }
+
+    public String extractPhoneSuffix(String academyCode) {
+        return academyCode.substring(3, 7);
     }
 }
