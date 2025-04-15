@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.domain.post.comment.dto;
+package com.golden_dobakhe.HakPle.domain.post.comment.comment.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

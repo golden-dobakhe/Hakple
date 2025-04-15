@@ -33,6 +33,17 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security") //security
 
 
+	// JWT & JSON
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+	// Gson - JSON 메시지를 다루기 위한 라이브러리
+	implementation("com.google.code.gson:gson")
+
+	// Validation
+	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+
 }
 
 // Docker Compose 설정 (정상 작동되는 버전)
@@ -48,5 +59,8 @@ dockerCompose {
 // bootRun 작업 종료 시 Docker Compose 정리
 tasks.named("bootRun") {
     finalizedBy("dockerComposeDown") // bootRun 작업 종료 후 dockerComposeDown 실행
-}
 
+}
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-parameters")
+}

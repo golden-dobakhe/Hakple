@@ -1,5 +1,6 @@
-package com.golden_dobakhe.HakPle.domain.post.post.exception;
+package com.golden_dobakhe.HakPle.global.entity.exception;
 
+import com.golden_dobakhe.HakPle.domain.post.post.exception.BoardException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

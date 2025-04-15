@@ -24,8 +24,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString
 public class User extends BaseEntity {
-    @Column(length = 100, nullable = false)
-    private String userName;  //유저아이디임
+
+    @Column(length = 100, nullable = false,unique = true)
+    private String userName;
 
     @Column(nullable = false)
     private String password;

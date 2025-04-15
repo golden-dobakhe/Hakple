@@ -1,8 +1,8 @@
-package com.golden_dobakhe.HakPle.domain.post.comment.controller;
+package com.golden_dobakhe.HakPle.domain.post.comment.comment.controller;
 
-import com.golden_dobakhe.HakPle.domain.post.comment.CommentDeleteResult;
-import com.golden_dobakhe.HakPle.domain.post.comment.dto.CommentRequestDto;
-import com.golden_dobakhe.HakPle.domain.post.comment.service.CommentService;
+import com.golden_dobakhe.HakPle.domain.post.comment.CommentResult;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentRequestDto;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class ApiV1CommentController {
     })
     @PostMapping
     public ResponseEntity<String> postComment(@RequestBody CommentRequestDto commentRequestDto) {
-        CommentDeleteResult result = commentService.commentSave(commentRequestDto);
+        CommentResult result = commentService.commentSave(commentRequestDto);
 
         switch (result) {
             case SUCCESS:
@@ -55,7 +55,7 @@ public class ApiV1CommentController {
     })
     @PostMapping("/update")
     public ResponseEntity<String> updateComment(@RequestBody CommentRequestDto commentRequestDto) {
-        CommentDeleteResult result = commentService.commentUpdate(commentRequestDto);
+        CommentResult result = commentService.commentUpdate(commentRequestDto);
 
         switch (result) {
             case USER_NOT_FOUND:
@@ -82,7 +82,7 @@ public class ApiV1CommentController {
     })
     @DeleteMapping("/{commenterId}")
     public ResponseEntity<String> deleteComment(@PathVariable(name = "commenterId") Long commenterId) {
-        CommentDeleteResult result = commentService.commentDelete(commenterId);
+        CommentResult result = commentService.commentDelete(commenterId);
 
         switch (result) {
             case USER_NOT_FOUND:
