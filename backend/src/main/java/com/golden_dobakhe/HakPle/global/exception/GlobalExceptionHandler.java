@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.global.entity.exception;
+package com.golden_dobakhe.HakPle.global.exception;
 
 import com.golden_dobakhe.HakPle.domain.post.post.exception.BoardException;
 import com.golden_dobakhe.HakPle.domain.resource.image.exception.ProfileImageException;

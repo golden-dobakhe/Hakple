@@ -2,7 +2,7 @@ package com.golden_dobakhe.HakPle.domain.post.comment.like.controller;
 
 import com.golden_dobakhe.HakPle.SecurityTestUtils;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+import com.golden_dobakhe.HakPle.global.Status;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

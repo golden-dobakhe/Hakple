@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.global.entity;
+package com.golden_dobakhe.HakPle.global;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
