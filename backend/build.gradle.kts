@@ -43,6 +43,9 @@ dependencies {
 	// Validation
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 
+	// Oauth2
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
 }
 
 //// Docker Compose 설정 (정상 작동되는 버전)

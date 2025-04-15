@@ -39,3 +39,10 @@ out/
 
 ### Custom ###
 application-secret.yml
+db.dev.*
+
+### terraform ###
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.*
