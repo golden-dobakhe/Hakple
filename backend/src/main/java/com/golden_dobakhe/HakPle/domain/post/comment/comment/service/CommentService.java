@@ -4,7 +4,6 @@ import com.golden_dobakhe.HakPle.domain.post.comment.CommentResult;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentRequestDto;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentRepository;
-import com.golden_dobakhe.HakPle.domain.post.comment.exception.CommentException;
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
 import com.golden_dobakhe.HakPle.domain.post.post.repository.BoardRepository;
 import com.golden_dobakhe.HakPle.domain.user.entity.User;
