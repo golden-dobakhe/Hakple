@@ -5,7 +5,7 @@ package com.golden_dobakhe.HakPle.security.jwt;
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.global.Status;
-import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
+import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -117,7 +117,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         log.info(">>> userId: " + userId);
         log.info(">>> JWT Claims: " + claims);
-        AnotherCustomUserDetails customUserDetails = new AnotherCustomUserDetails(user);
+        CustomUserDetails customUserDetails = new CustomUserDetails(user);
 
 
         //그리고 status를 권한으로 인식해서 넣어준다

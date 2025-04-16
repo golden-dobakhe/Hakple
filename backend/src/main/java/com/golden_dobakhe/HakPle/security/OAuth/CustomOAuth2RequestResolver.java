@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.security.AOuth;
+package com.golden_dobakhe.HakPle.security.OAuth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;

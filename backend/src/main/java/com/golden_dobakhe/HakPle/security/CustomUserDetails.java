@@ -12,10 +12,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Getter
-public class AnotherCustomUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
     private final User user;
 
-    public AnotherCustomUserDetails(User user) {
+    public CustomUserDetails(User user) {
         this.user = user;
     }
 

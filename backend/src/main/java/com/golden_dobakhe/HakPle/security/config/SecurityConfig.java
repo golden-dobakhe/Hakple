@@ -1,8 +1,8 @@
 package com.golden_dobakhe.HakPle.security.config;
 
 
-import com.golden_dobakhe.HakPle.security.AOuth.CustomOAuth2RequestResolver;
-import com.golden_dobakhe.HakPle.security.AOuth.CustomOAuth2SuccessHandler;
+import com.golden_dobakhe.HakPle.security.OAuth.CustomOAuth2RequestResolver;
+import com.golden_dobakhe.HakPle.security.OAuth.CustomOAuth2SuccessHandler;
 import com.golden_dobakhe.HakPle.security.jwt.JwtAuthFilter;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
 
@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/failure", "/login",
                                 "/oauth2/authorization/kakao?redirectUrl=http://localhost:3000", //카카오 로그인
+
                                 "/swagger-ui/**",            // Swagger UI
                                 "/v3/api-docs/**",           // OpenAPI JSON
                                 "/swagger-resources/**",     // Swagger 리소스
