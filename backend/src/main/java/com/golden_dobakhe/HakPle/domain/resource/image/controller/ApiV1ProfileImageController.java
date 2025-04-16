@@ -10,10 +10,10 @@ import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ApiV1ProfileImageController {
     private final ProfileImageService profileImageService;
 
-    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/profile";
+//    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/profile";
 
     @Operation(summary = "프로필 이미지 등록/수정", description = "사용자가 자신의 프로필 사진을 업로드합니다.")
     @ApiResponses({
@@ -34,9 +34,13 @@ public class ApiV1ProfileImageController {
     })
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadProfileImage(
-            @RequestParam("userName") String userName,
-            @RequestPart("file") MultipartFile file
+            @RequestPart("file") MultipartFile file, Authentication authentication
     ) throws IOException {
+        String userName = authentication.getName(); // JWT 필터에서 유저네임 꺼내옴
+//    public ResponseEntity<?> uploadProfileImage(
+//            @RequestParam("userName") String userName,
+//            @RequestPart("file") MultipartFile file
+//    ) throws IOException {
         ProfileImageRequestDto dto = new ProfileImageRequestDto(userName);
         String path = profileImageService.uploadProfileImage(dto, file);
         return ResponseEntity.ok("프로필 이미지 업로드 성공: " + path);
@@ -44,7 +48,9 @@ public class ApiV1ProfileImageController {
 
     @Operation(summary = "프로필 이미지 삭제", description = "사용자의 프로필 이미지를 삭제합니다.")
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteProfileImage(@RequestParam("userName") String userName) {
+    public ResponseEntity<?> deleteProfileImage(Authentication authentication) {
+        String userName = authentication.getName(); // JWT 필터에서 유저네임 꺼내옴
+//    public ResponseEntity<?> deleteProfileImage(@RequestParam("userName") String userName) {
         profileImageService.deleteProfileImage(userName);
         return ResponseEntity.ok("프로필 이미지 삭제 성공");
     }

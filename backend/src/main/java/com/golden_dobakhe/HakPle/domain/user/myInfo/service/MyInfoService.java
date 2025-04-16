@@ -1,11 +1,11 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.service;
 
 import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
-import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.dto.MyInfoResponseDto;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.dto.MyInfoUpdateRequestDto;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.validator.NickNameValidator;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.validator.PhoneNumValidator;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class MyInfoService {
                 .username(user.getUserName())
                 .phoneNum(user.getPhoneNum())
                 .creationTime(user.getCreationTime())
-                .academyId(user.getAcademyId())
+                .academyCode(user.getAcademyId())
                 .build();
     }
 
@@ -39,14 +39,14 @@ public class MyInfoService {
 
         //nickName 변경
         String newNickName = requestDto.getNickName();
-        if (newNickName != null) {
+        if (newNickName != null && !newNickName.equals(user.getNickName())) {
             NickNameValidator.validateNickName(newNickName, user.getNickName(), userRepository);
             user.setNickName(newNickName);
         }
 
         //PhoneNum 변경
         String newPhoneNum = requestDto.getPhoneNum();
-        if (newPhoneNum != null) {
+        if (newPhoneNum != null && !newPhoneNum.equals(user.getPhoneNum())) {
             PhoneNumValidator.validatePhoneNum(newPhoneNum, user.getPhoneNum(), userRepository);
             user.setPhoneNum(newPhoneNum);
         }
