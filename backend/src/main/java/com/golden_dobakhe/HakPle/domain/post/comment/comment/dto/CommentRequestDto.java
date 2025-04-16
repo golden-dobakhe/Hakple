@@ -18,5 +18,5 @@ public class CommentRequestDto {
     private String content;
 
     @Schema(description = "댓글 작성자 ID", example = "100", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Long commenterId;
+    private Long commentId;
 }
