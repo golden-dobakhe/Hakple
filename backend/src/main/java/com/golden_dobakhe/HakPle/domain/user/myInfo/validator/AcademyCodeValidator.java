@@ -4,7 +4,7 @@ import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoErrorCode;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoException;
 
 public class AcademyCodeValidator {
-    private static final String CODE_REGEX = "^[A-Z]{3}\\d{4}[A-Z]{3}$"; // ABC1234XYZ
+    private static final String CODE_REGEX = "^[A-Z]{3}\\d{4}[A-Z]{3}$"; // LLN1234XYZ
 
     public static void validateAcademyId(String academyId) {
         if (academyId == null || academyId.isBlank()) {

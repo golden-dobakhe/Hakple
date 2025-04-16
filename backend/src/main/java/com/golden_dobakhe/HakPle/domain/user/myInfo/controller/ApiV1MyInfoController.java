@@ -31,7 +31,7 @@ public class ApiV1MyInfoController {
             @ApiResponse(responseCode = "200", description = "정보 조회 성공"),
             @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
     })
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<MyInfoResponseDto> getMyInfo(Authentication authentication) {
         String userName = authentication.getName(); // JWT 필터가 유저네임 넣어줌
 //    public ResponseEntity<MyInfoResponseDto> getMyInfo(@RequestParam("userName") String userName) {
