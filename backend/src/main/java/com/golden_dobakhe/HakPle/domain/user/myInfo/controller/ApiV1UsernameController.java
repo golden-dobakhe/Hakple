@@ -21,7 +21,7 @@ public class ApiV1UsernameController {
             @RequestParam(name = "phoneNum") String phoneNum) {
         try {
             String userName = usernameService.findUserNameByPhoneNum(nickName, phoneNum);
-            return ResponseEntity.ok("회원님의 아이디는: " + userName + " 입니다.");
+            return ResponseEntity.ok(userName);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
