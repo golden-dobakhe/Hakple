@@ -24,7 +24,10 @@ public enum UserErrorCode {
     USERNAME_DUPLICATE("아이디를 이미 사용 중입니다."),
 
     @Schema(description = "닉네임을 이미 사용 중입니다.")
-    NICKNAME_DUPLICATE("닉네임을 이미 사용 중입니다.");
+    NICKNAME_DUPLICATE("닉네임을 이미 사용 중입니다."),
+
+    @Schema(description = "전화번호를 이미 사용 중입니다.")
+    PHONENUM_DUPLICATE("전화번호를 이미 사용 중입니다.");
 
     private final String message;
 
