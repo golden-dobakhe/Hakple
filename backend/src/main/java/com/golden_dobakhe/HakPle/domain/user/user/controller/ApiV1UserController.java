@@ -42,6 +42,7 @@ public class ApiV1UserController {
         userService.register(userDTO);
         return ResponseEntity.ok("회원가입이 성공적으로 완료되었습니다.");
     }
+
     @Operation(summary = "비밀번호 변경", description = "로그인된 사용자가 현재 비밀번호를 확인하고 새 비밀번호로 변경합니다.")
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(
