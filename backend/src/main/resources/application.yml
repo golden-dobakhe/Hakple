@@ -80,7 +80,7 @@ custom:
 jwt:
   secretKey: 127393911531540290533352supercalifragilisticexpialidocious
   refreshKey: 127393911531540290533352supercalifragilisticexpialidocious
-  
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html # Swagger UI 접근 경로

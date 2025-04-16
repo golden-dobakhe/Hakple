@@ -42,7 +42,7 @@ public class ApiV1MyInfoController {
 
     @Operation(
             summary = "내 정보 수정",
-            description = "사용자의 닉네임, 전화번호, 학원 정보를 수정합니다."
+            description = "사용자의 닉네임, 전화번호를 수정합니다. \n 닉네임, 전화번호 중 하나만 수정도 가능합니다.(수정하지 않을 항목은 기존 정보를 입력하세요.)"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "정보 수정 성공"),

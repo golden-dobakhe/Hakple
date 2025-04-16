@@ -21,7 +21,7 @@ public class ApiV1AcademyController {
 
     @Operation(
             summary = "학원 등록",
-            description = "사용자가 학원 코드를 입력하여 학원을 등록됩니다."
+            description = "사용자가 학원 코드를 입력하면 학원이 등록됩니다."
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "학원 등록 성공"),

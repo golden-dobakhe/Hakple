@@ -2,9 +2,9 @@ package com.golden_dobakhe.HakPle.domain.user.user.service;
 
 
 import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.UserDTO;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.Status;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +45,8 @@ public class UserService {
     }
 
     //비밀번호 변경 (로그인한 사용자가 내 정보에서 비밀번호 변경)
-    public void changePasswordWithOldPassword(Long userId, String currentPassword, String newPassword, String newPasswordConfirm) {
+    public void changePasswordWithOldPassword(Long userId, String currentPassword, String newPassword,
+                                              String newPasswordConfirm) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND));
 
@@ -62,6 +63,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
+
     //비밀번호 찾기 후 문자 인증이 완료된 경우 비밀번호 재설정
     public void resetPassword(Long userId, String newPassword, String newPasswordConfirm) {
         User user = userRepository.findById(userId)

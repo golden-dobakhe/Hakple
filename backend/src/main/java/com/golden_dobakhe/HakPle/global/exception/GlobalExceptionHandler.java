@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
         return ResponseEntity
                 .status(500)
-                .body(new ErrorResponse("서버 오류가 발생했습니다."));
+                .body(new ErrorResponse(e.getMessage()));
     }
 
     public record ErrorResponse(String message) {
