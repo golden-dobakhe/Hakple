@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.domain.user.entity;
+package com.golden_dobakhe.HakPle.domain.user.user.entity;
 
 import java.util.Arrays;
 

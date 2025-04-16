@@ -3,7 +3,7 @@ package com.golden_dobakhe.HakPle.domain.user.myInfo.validator;
 
 import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoErrorCode;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoException;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 
 public class PhoneNumValidator {
     private static final String PHONE_REGEX = "^\\d{10,11}$";

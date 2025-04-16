@@ -4,7 +4,6 @@ import com.golden_dobakhe.HakPle.domain.post.comment.report.service.CommentRepor
 
 import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
 
-import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

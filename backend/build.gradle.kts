@@ -28,7 +28,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     runtimeOnly("com.h2database:h2")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-//    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+//  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
     implementation("org.springframework.boot:spring-boot-starter-security") //security
 
@@ -43,6 +43,11 @@ dependencies {
 
 	// Validation
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+
+    //누리고
+    implementation("net.nurigo:sdk:4.2.7") // 누리고 SDK
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
 	// Oauth2
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")

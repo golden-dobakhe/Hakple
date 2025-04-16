@@ -1,7 +1,6 @@
 package com.golden_dobakhe.HakPle.security;
 
 //리퀘스트 클래스
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

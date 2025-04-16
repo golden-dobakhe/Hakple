@@ -1,7 +1,7 @@
 package com.golden_dobakhe.HakPle.domain.post.post.repository;
 
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+import com.golden_dobakhe.HakPle.global.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

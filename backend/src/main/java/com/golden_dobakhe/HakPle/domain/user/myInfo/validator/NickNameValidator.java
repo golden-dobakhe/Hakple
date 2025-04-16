@@ -3,7 +3,8 @@ package com.golden_dobakhe.HakPle.domain.user.myInfo.validator;
 
 import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoErrorCode;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoException;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
+
 
 public class NickNameValidator {
     private static final String NICKNAME_REGEX = "^[a-zA-Z가-힣0-9_.-]{2,20}$";

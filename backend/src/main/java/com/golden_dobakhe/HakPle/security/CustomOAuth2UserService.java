@@ -1,7 +1,8 @@
 package com.golden_dobakhe.HakPle.security;
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.global.Status;
 import com.golden_dobakhe.HakPle.security.service.TestAuthService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

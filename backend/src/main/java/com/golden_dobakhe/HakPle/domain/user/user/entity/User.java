@@ -1,8 +1,8 @@
-package com.golden_dobakhe.HakPle.domain.user.entity;
+package com.golden_dobakhe.HakPle.domain.user.user.entity;
 
 import com.golden_dobakhe.HakPle.domain.resource.image.entity.Image;
 import com.golden_dobakhe.HakPle.global.entity.BaseEntity;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+import com.golden_dobakhe.HakPle.global.Status;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +40,7 @@ public class User extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String phoneNum;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = true)
     private String academyId;
 
     @Enumerated(EnumType.STRING)

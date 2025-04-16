@@ -2,11 +2,9 @@ package com.golden_dobakhe.HakPle.security.jwt;
 
 //시큐리티에게 jwt를 넘겨주기 위한 필터
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.global.entity.Status;
-import com.golden_dobakhe.HakPle.security.CustomUserDetails;
-import com.golden_dobakhe.HakPle.security.SecurityUser;
-import com.nimbusds.oauth2.sdk.auth.JWTAuthentication;
+
+import com.golden_dobakhe.HakPle.global.Status;
+import com.golden_dobakhe.HakPle.security.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -14,17 +12,14 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -104,7 +99,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + statusStr.toUpperCase()));
         //토큰에서 유저 정보를 넣고
-        CustomUserDetails customUserDetails = new CustomUserDetails(userName, nickname, status, authorities);
+        CustomUserDetailsService.CustomUserDetails customUserDetails = new CustomUserDetailsService.CustomUserDetails(userName, nickname, status, authorities);
 
 
         //그리고 status를 권한으로 인식해서 넣어준다

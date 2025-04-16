@@ -3,11 +3,11 @@ package com.golden_dobakhe.HakPle.domain.post.comment.like.controller;
 import com.golden_dobakhe.HakPle.domain.post.comment.CommentResult;
 import com.golden_dobakhe.HakPle.domain.post.comment.like.dto.LikedCommentDto;
 import com.golden_dobakhe.HakPle.domain.post.comment.like.service.LikeService;
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
 
+
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
 
-import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

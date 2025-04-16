@@ -1,7 +1,7 @@
 package com.golden_dobakhe.HakPle.domain.post.comment.like.entity;
 
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;

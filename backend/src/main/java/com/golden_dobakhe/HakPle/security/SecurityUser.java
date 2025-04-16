@@ -1,6 +1,6 @@
 package com.golden_dobakhe.HakPle.security;
 
-import com.golden_dobakhe.HakPle.global.entity.Status;
+import com.golden_dobakhe.HakPle.global.Status;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
