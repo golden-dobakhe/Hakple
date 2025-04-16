@@ -37,7 +37,8 @@ public class SecurityConfig {
                                 "/swagger-ui/**",            // Swagger UI
                                 "/v3/api-docs/**",           // OpenAPI JSON
                                 "/swagger-resources/**",     // Swagger 리소스
-                                "/webjars/**"                // Swagger static
+                                "/webjars/**",               // Swagger static
+                                "/api/v1/**"
                                          ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session

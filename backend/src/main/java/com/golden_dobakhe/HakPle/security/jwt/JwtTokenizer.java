@@ -34,6 +34,7 @@ public class JwtTokenizer {
         Claims claims = Jwts.claims().setSubject(userName);
         claims.put("nickName", nickName);
         claims.put("status", status);
+        claims.put("userId",id); //userId 추가
 
 
         //토큰에 그 요소들을 넣기
