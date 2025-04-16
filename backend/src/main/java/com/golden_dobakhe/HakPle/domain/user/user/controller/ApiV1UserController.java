@@ -6,7 +6,7 @@ import com.golden_dobakhe.HakPle.domain.user.user.dto.DeleteUserRequestDto;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.ResetPasswordRequest;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.UserDTO;
 import com.golden_dobakhe.HakPle.domain.user.user.service.UserService;
-import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
+import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -54,7 +54,7 @@ public class ApiV1UserController {
     @Operation(summary = "비밀번호 변경", description = "로그인된 사용자가 현재 비밀번호를 확인하고 새 비밀번호로 변경합니다.")
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(
-            @AuthenticationPrincipal AnotherCustomUserDetails principal,
+            @AuthenticationPrincipal CustomUserDetails principal,
             @RequestBody @Valid ChangePasswordRequest request
     ) {
         userService.changePasswordWithOldPassword(
@@ -70,7 +70,7 @@ public class ApiV1UserController {
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(
             @Parameter(description = "사용자 ID", example = "1")
-            @AuthenticationPrincipal AnotherCustomUserDetails principal,
+            @AuthenticationPrincipal CustomUserDetails principal,
             @RequestBody @Valid ResetPasswordRequest request
     ) {
         userService.resetPassword(
@@ -89,7 +89,7 @@ public class ApiV1UserController {
             @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
     })
     public ResponseEntity<String> withdrawUser(@RequestBody DeleteUserRequestDto dto,
-                                               @AuthenticationPrincipal AnotherCustomUserDetails principal) {
+                                               @AuthenticationPrincipal CustomUserDetails principal) {
         Long userId = principal.getUser().getId();
         WithdrawResult result = userService.withdraw(userId, dto.getPassword());
 
@@ -108,7 +108,7 @@ public class ApiV1UserController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@AuthenticationPrincipal AnotherCustomUserDetails principal,
+    public ResponseEntity<String> logout(@AuthenticationPrincipal CustomUserDetails principal,
                                          @RequestHeader("Authorization") String bearerToken) {
         String token = bearerToken.replace("Bearer ", "");
         Long userId = principal.getUser().getId();

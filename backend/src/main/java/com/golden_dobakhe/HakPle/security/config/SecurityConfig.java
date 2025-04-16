@@ -1,9 +1,9 @@
-package com.golden_dobakhe.HakPle.security;
+package com.golden_dobakhe.HakPle.security.config;
 
 
+import com.golden_dobakhe.HakPle.security.OAuth.CustomOAuth2RequestResolver;
+import com.golden_dobakhe.HakPle.security.OAuth.CustomOAuth2SuccessHandler;
 import com.golden_dobakhe.HakPle.security.jwt.JwtAuthFilter;
-import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +25,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
+    private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
+    private final CustomOAuth2RequestResolver customOAuth2RequestResolver;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
@@ -48,10 +50,18 @@ public class SecurityConfig {
                 //http베이직은 헤더에서 보안에 취약하고 쟤를 빼버리고, 다른 인증수단인 베어러(얜 이거 빼면 자동으로 지정됨)으로 한다고 한다
                 //이후 요청시 헤더에 Authorization
                 .httpBasic(httpBasic -> httpBasic.disable())
-                //.oauth2Login( oauth -> oauth )
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .formLogin(form -> form.disable()
-                );
+                .formLogin(form -> form.disable())
+                //소셜 로그인은 여기서 진행된다
+                .oauth2Login(oauth2LoginConfig -> oauth2LoginConfig
+                        .successHandler(customOAuth2SuccessHandler)
+                        .authorizationEndpoint(
+                                authorizationEndpointConfig ->
+                                        authorizationEndpointConfig
+                                                .authorizationRequestResolver(customOAuth2RequestResolver)
+                        )
+                )
+        ;
         //문제가 생기면 .anyRequest().permitAll() // 🔓 모든 요청 허용로 일단은 바꿔보고 해보세요, 필터는 jwt로 바꾸었습니다
         return security.build();
 

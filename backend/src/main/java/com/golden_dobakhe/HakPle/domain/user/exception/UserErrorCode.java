@@ -26,6 +26,9 @@ public enum UserErrorCode {
     @Schema(description = "닉네임을 이미 사용 중입니다.")
     NICKNAME_DUPLICATE("닉네임을 이미 사용 중입니다.", HttpStatus.CONFLICT),
 
+    @Schema(description = "전화번호를 이미 사용 중입니다.")
+    PHONENUM_DUPLICATE("전화번호를 이미 사용 중입니다.",HttpStatus.CONFLICT),
+
     @Schema(description = "Access Token 블랙리스트 등록 실패")
     ACCESS_TOKEN_BLACKLIST_FAIL("Access Token 블랙리스트 등록 실패", HttpStatus.INTERNAL_SERVER_ERROR),
 

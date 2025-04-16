@@ -6,7 +6,7 @@ import com.golden_dobakhe.HakPle.domain.post.comment.like.service.LikeService;
 
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
+import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,7 +33,7 @@ public class ApiV1LikeController {
     public ResponseEntity<CommentResult> likeComment(
             @Parameter(description = "좋아요를 등록할 댓글 ID", example = "1")
             @PathVariable(name ="commentId") Long commentId,
-            @AuthenticationPrincipal AnotherCustomUserDetails principal
+            @AuthenticationPrincipal CustomUserDetails principal
     ) {
         User user = principal.getUser();
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -54,7 +54,7 @@ public class ApiV1LikeController {
     @ApiResponse(responseCode = "200", description = "목록 조회 성공")
     @GetMapping("/my/comments")
     public ResponseEntity<List<LikedCommentDto>> getMyLikedComments(
-            @AuthenticationPrincipal AnotherCustomUserDetails principal
+            @AuthenticationPrincipal CustomUserDetails principal
     ) {
         User user = principal.getUser();
         return ResponseEntity.ok(likeService.userLikedComments(user.getId()));
@@ -64,7 +64,7 @@ public class ApiV1LikeController {
     @ApiResponse(responseCode = "200", description = "카운트 조회 성공")
     @GetMapping("/my/comments/count")
     public ResponseEntity<Integer> getMyLikedCommentCount(
-            @AuthenticationPrincipal AnotherCustomUserDetails principal
+            @AuthenticationPrincipal CustomUserDetails principal
     ) {
         User user = principal.getUser();
         return ResponseEntity.ok(likeService.countUserLikedComments(user.getId()));
@@ -74,7 +74,7 @@ public class ApiV1LikeController {
     @Operation(summary = "댓글 좋아요 취소", description = "이미 좋아요 누른 댓글만 취소 가능")
     public ResponseEntity<CommentResult> unlikeComment(
             @PathVariable(name ="commentId") Long commentId,
-            @AuthenticationPrincipal AnotherCustomUserDetails principal
+            @AuthenticationPrincipal CustomUserDetails principal
 
     ) {
         User user = principal.getUser();

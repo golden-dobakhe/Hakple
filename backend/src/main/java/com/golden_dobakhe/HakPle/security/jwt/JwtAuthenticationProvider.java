@@ -3,7 +3,7 @@ package com.golden_dobakhe.HakPle.security.jwt;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.Status;
-import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
+import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
@@ -82,7 +82,7 @@ public class JwtAuthenticationProvider {
         );
 
         log.info("✅ 사용자 인증 완료: userId = {}", userId);
-        AnotherCustomUserDetails customUserDetails = new AnotherCustomUserDetails(userForPrincipal);
+        CustomUserDetails customUserDetails = new CustomUserDetails(userForPrincipal);
 
         return new JwtAuthenticationToken(authorities, customUserDetails, null);
     }

@@ -39,6 +39,12 @@ public class UserService {
             throw new UserException(UserErrorCode.NICKNAME_DUPLICATE);
         }
 
+
+        // 전화번호 중복 확인
+        if (userRepository.existsByPhoneNum(userDTO.getPhoneNumber())) {
+            throw new UserException(UserErrorCode.PHONENUM_DUPLICATE);
+        }
+
         // User 엔티티로 변환 및 저장
         User user = User.builder()
                 .userName(userDTO.getUserName())
