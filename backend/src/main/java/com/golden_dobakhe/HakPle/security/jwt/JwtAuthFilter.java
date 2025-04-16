@@ -7,6 +7,7 @@ import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.global.Status;
 import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -93,37 +94,53 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         return null;
     }
 
-    //토큰에서 받은 정보를 파싱
     private Authentication getAuthentication(String token) {
-        Claims claims = jwtTokenizer.parseAccessToken(token);
+        Claims claims;
+        try {
+            claims = jwtTokenizer.parseAccessToken(token);
+        } catch (ExpiredJwtException e) {
+            log.warn("🔐 만료된 토큰 사용 시도: {}", e.getMessage());
+            throw new RuntimeException("토큰이 만료되었습니다", e); // 또는 return null; 후 SecurityException 던져도 가능
+        }
+
         String userName = claims.getSubject();
-        Long userId = claims.get("userId", Long.class); //userId 추가
+
+        Object userIdRaw = claims.get("userId");
+        Long userId = null;
+
+        if (userIdRaw instanceof Integer) {
+            userId = ((Integer) userIdRaw).longValue();
+        } else if (userIdRaw instanceof Long) {
+            userId = (Long) userIdRaw;
+        } else if (userIdRaw instanceof String) {
+            userId = Long.parseLong((String) userIdRaw);
+        }
+
+        if (userId == null) {
+            throw new IllegalStateException("JWT에 userId가 없습니다!");
+        }
+
         String nickname = claims.get("nickname", String.class);
         String statusStr = claims.get("status", String.class);
         Status status = Status.valueOf(statusStr);
 
-        // ✅ User 객체 생성
         User user = User.builder()
                 .userName(userName)
                 .nickName(nickname)
                 .status(status)
-                .password("N/A") // 비밀번호 필요 없으면 N/A 또는 공백
-                .id(userId) //userId 추가
+                .password("N/A")
+                .id(userId)
                 .build();
 
-
-        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + statusStr.toUpperCase()));
-        //토큰에서 유저 정보를 넣고
+        List<GrantedAuthority> authorities = List.of(
+                new SimpleGrantedAuthority("ROLE_" + statusStr.toUpperCase())
+        );
 
         log.info(">>> userId: " + userId);
         log.info(">>> JWT Claims: " + claims);
-        CustomUserDetails customUserDetails = new CustomUserDetails(user);
 
-
-        //그리고 status를 권한으로 인식해서 넣어준다
-
-        //SecurityContextHolder.getContext().setAuthentication(authentication);
-        //그걸 SecurityContextHoldere안의 principal안에 넣어준다
+        AnotherCustomUserDetails customUserDetails = new AnotherCustomUserDetails(user);
         return new JwtAuthenticationToken(authorities, customUserDetails, null);
     }
+
 }
