@@ -44,34 +44,38 @@ export default function Home() {
               </button>
 
               <Link href="/" className="flex items-center flex-shrink-0">
-                <span className="font-bold text-xl md:text-2xl tracking-wide text-gray-800">
-                  HAKPLE
-                </span>
+                <img
+                  src="logo.png"
+                  alt="HAKPLE"
+                  width={55}
+                  height={55}
+                  className="logo"
+                />
               </Link>
 
               {/* 데스크탑 메뉴 */}
-              <nav className="hidden md:flex space-x-4 lg:space-x-6">
+              <nav className="hidden md:flex space-x-5 lg:space-x-8">
                 <Link
                   href="/home"
-                  className="font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap"
+                  className="font-medium text-lg text-gray-700 hover:text-gray-900 whitespace-nowrap hover:font-semibold transition-all"
                 >
                   홈
                 </Link>
                 <Link
                   href="/academy"
-                  className="font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap"
+                  className="font-medium text-lg text-gray-700 hover:text-gray-900 whitespace-nowrap hover:font-semibold transition-all"
                 >
                   게시판
                 </Link>
                 <Link
                   href="/boad"
-                  className="font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap"
+                  className="font-medium text-lg text-gray-700 hover:text-gray-900 whitespace-nowrap hover:font-semibold transition-all"
                 >
                   인기글
                 </Link>
                 <Link
                   href="/community"
-                  className="font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap"
+                  className="font-medium text-lg text-gray-700 hover:text-gray-900 whitespace-nowrap hover:font-semibold transition-all"
                 >
                   캘린더
                 </Link>
@@ -96,11 +100,11 @@ export default function Home() {
                 </div>
                 <input
                   type="search"
-                  className="block w-full pl-8 md:pl-10 pr-3 py-1 md:py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 text-sm"
+                  className="block w-full pl-8 md:pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 text-sm"
                   placeholder="검색어를 입력하세요"
                 />
               </div>
-              <button className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-1 px-3 md:py-2 md:px-6 rounded-md text-sm whitespace-nowrap">
+              <button className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 md:px-6 rounded-md text-sm whitespace-nowrap h-[38px]">
                 로그인
               </button>
             </div>
@@ -112,25 +116,25 @@ export default function Home() {
               <nav className="flex flex-col space-y-2 py-2">
                 <Link
                   href="/home"
-                  className="font-medium text-gray-700 hover:text-gray-900 px-2 py-1 rounded-md hover:bg-gray-100"
+                  className="font-medium text-base text-gray-700 hover:text-gray-900 px-2 py-2 rounded-md hover:bg-gray-100"
                 >
                   홈
                 </Link>
                 <Link
                   href="/academy"
-                  className="font-medium text-gray-700 hover:text-gray-900 px-2 py-1 rounded-md hover:bg-gray-100"
+                  className="font-medium text-base text-gray-700 hover:text-gray-900 px-2 py-2 rounded-md hover:bg-gray-100"
                 >
                   게시판
                 </Link>
                 <Link
                   href="/boad"
-                  className="font-medium text-gray-700 hover:text-gray-900 px-2 py-1 rounded-md hover:bg-gray-100"
+                  className="font-medium text-base text-gray-700 hover:text-gray-900 px-2 py-2 rounded-md hover:bg-gray-100"
                 >
                   인기글
                 </Link>
                 <Link
                   href="/community"
-                  className="font-medium text-gray-700 hover:text-gray-900 px-2 py-1 rounded-md hover:bg-gray-100"
+                  className="font-medium text-base text-gray-700 hover:text-gray-900 px-2 py-2 rounded-md hover:bg-gray-100"
                 >
                   캘린더
                 </Link>
@@ -141,7 +145,7 @@ export default function Home() {
       </header>
 
       <main className="flex flex-col items-center justify-center py-12 px-4 max-w-screen-lg mx-auto">
-        <section className="w-full text-center mb-20">
+        <section className="w-full text-center mb-15">
           <h1 className="text-3xl font-bold mb-4">
             학원 생활의 시작,
             <br />
