@@ -3,10 +3,9 @@ package com.golden_dobakhe.HakPle.security;
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.global.Status;
-import com.golden_dobakhe.HakPle.security.service.TestAuthService;
+import com.golden_dobakhe.HakPle.security.service.AuthService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -20,7 +19,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
-    private final TestAuthService testUserService;
+    private final AuthService testUserService;
 
 
     @Transactional

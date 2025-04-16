@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.security;
+package com.golden_dobakhe.HakPle.security.config;
 
 
 import com.golden_dobakhe.HakPle.security.jwt.JwtAuthFilter;

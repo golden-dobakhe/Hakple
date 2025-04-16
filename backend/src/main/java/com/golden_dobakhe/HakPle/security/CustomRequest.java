@@ -1,14 +1,13 @@
 package com.golden_dobakhe.HakPle.security;
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.security.service.TestAuthService;
+import com.golden_dobakhe.HakPle.security.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +26,7 @@ import java.util.Optional;
 public class CustomRequest {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
-    private final TestAuthService authService;
+    private final AuthService authService;
 
     //로그인 처리를 위하여 SecurityContextHolder에 유저를 넣음
     public void setLogin(User member) {
@@ -115,20 +114,22 @@ public class CustomRequest {
         return req.getHeader(name);
     }
 
-    //토큰 만들기
+    //토큰 만들고 헤더에 등록시키기
     //얜 jwt인가
-    public void refreshAccessToken(Member member) {
-        String newAccessToken = memberService.genAccessToken(member);
-
-        setHeader("Authorization", "Bearer " + member.getApiKey() + " " + newAccessToken);
-        setCookie("accessToken", newAccessToken);
-    }
+//    public void refreshAccessToken(Member member) {
+//        String newAccessToken = memberService.genAccessToken(member);
+//
+//        setHeader("Authorization", "Bearer " + member.getApiKey() + " " + newAccessToken);
+//        setCookie("accessToken", newAccessToken);
+//    }
 
     //인증 쿠키 만들기
-    public String makeAuthCookies(Member member) {
-        String accessToken = memberService.genAccessToken(member);
+    public String makeAuthCookies(User user) {
+        //대충 서비스에서 토큰을 생성하는 메서드를 생성
+        String accessToken = authService.genAccessToken(user);
 
-        setCookie("apiKey", member.getApiKey());
+        //api키는 없이 토큰만 있다고 칩시다
+        //setCookie("apiKey", member.getApiKey());
         setCookie("accessToken", accessToken);
 
         return accessToken;
