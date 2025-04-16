@@ -16,7 +16,7 @@ public class JwtTokenizer {
     private final byte[] accessSecret;
     private final byte[] refreshSecret;
 
-    public static Long ACCESS_TOKEN_EXPIRE_COUNT=30*60*1000L; //이거 30분임 단위가 ms라서
+    public static Long ACCESS_TOKEN_EXPIRE_COUNT=1000 * 60 * 60 * 24L; //24시간
     public static Long REFRESH_TOKEN_EXPIRE_COUNT=7*24*60*60*1000L; //이건 일주일
 
     //@Value로 application.yml에 있는 환경변수값을 불러와서 생성

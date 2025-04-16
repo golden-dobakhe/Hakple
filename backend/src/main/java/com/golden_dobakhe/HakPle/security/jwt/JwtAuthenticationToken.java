@@ -21,6 +21,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
         //얜 장식
         this.credentials = credentials;
         //이때 인증 완료로 간주한다
+            //근데 그냥 이렇게 인증 완료 시켜도 되는건가...
         this.setAuthenticated(true);
     }
 
