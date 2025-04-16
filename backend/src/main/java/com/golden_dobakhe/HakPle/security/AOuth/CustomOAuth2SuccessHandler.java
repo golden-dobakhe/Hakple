@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.security;
+package com.golden_dobakhe.HakPle.security.AOuth;
 
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;

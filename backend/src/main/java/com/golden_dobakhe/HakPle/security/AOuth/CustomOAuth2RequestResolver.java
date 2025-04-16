@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.security;
+package com.golden_dobakhe.HakPle.security.AOuth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-//로그인이 정상적으로 처리되면 어찌 할꺼냐
 public class CustomOAuth2RequestResolver implements OAuth2AuthorizationRequestResolver {
     private final DefaultOAuth2AuthorizationRequestResolver defaultResolver;
 
