@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-
 //일단 시험용으로 만들어 놓긴 했는데
 //추후 이걸 가지고 복붙 하거나 지울 수 있음
 public class TestAuthController {
     private final TestAuthService userservice;
     private final JwtTokenizer jwtTokenizer;
+    private final PasswordEncoder passwordEncoder;
+
+
+
 
     @GetMapping("/")
     public ResponseEntity<String> home() {
@@ -37,9 +41,9 @@ public class TestAuthController {
         //없으면 나가리
         if (user == null)
             return ResponseEntity.status(404).body("님 없음");
-        if (!req.getPassword().equals(user.getPassword()))
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("비번이 틀린댑쇼");
-
+        if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("비밀번호가 틀렸습니다.");
+        }
         //있다면? 토큰 만들고
         String accessToken = jwtTokenizer.createAccessToken(user.getId(), user.getUserName(), user.getNickName(),user.getPhoneNum(), user.getStatus());
         String refreshToken = jwtTokenizer.createRefreshToken(user.getId(), user.getUserName(), user.getNickName(),user.getPhoneNum(), user.getStatus());

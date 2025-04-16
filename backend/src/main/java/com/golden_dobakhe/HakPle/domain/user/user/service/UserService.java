@@ -38,7 +38,7 @@ public class UserService {
                 .password(passwordEncoder.encode(userDTO.getPassword())) // 비밀번호 암호화
                 .nickName(userDTO.getNickName())
                 .phoneNum(userDTO.getPhoneNumber())
-                .status(Status.PENDING) // 기본 상태 설정
+                .status(Status.ACTIVE) // 기본 상태 설정
                 .build();
 
         userRepository.save(user);

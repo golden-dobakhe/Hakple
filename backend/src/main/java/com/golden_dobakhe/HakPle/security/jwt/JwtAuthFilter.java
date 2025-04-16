@@ -3,8 +3,9 @@ package com.golden_dobakhe.HakPle.security.jwt;
 //시큐리티에게 jwt를 넘겨주기 위한 필터
 
 
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.global.Status;
-import com.golden_dobakhe.HakPle.security.CustomUserDetailsService;
+import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,9 +24,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
+
 
 
     //시큐리티가 실행되기 이전 토큰을 시큐리티에게 알려주는 필터
@@ -93,13 +97,27 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private Authentication getAuthentication(String token) {
         Claims claims = jwtTokenizer.parseAccessToken(token);
         String userName = claims.getSubject();
+        Long userId = claims.get("userId", Long.class); //userId 추가
         String nickname = claims.get("nickname", String.class);
         String statusStr = claims.get("status", String.class);
         Status status = Status.valueOf(statusStr);
 
+        // ✅ User 객체 생성
+        User user = User.builder()
+                .userName(userName)
+                .nickName(nickname)
+                .status(status)
+                .password("N/A") // 비밀번호 필요 없으면 N/A 또는 공백
+                .id(userId) //userId 추가
+                .build();
+
+
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + statusStr.toUpperCase()));
         //토큰에서 유저 정보를 넣고
-        CustomUserDetailsService.CustomUserDetails customUserDetails = new CustomUserDetailsService.CustomUserDetails(userName, nickname, status, authorities);
+
+        log.info(">>> userId: " + userId);
+        log.info(">>> JWT Claims: " + claims);
+        AnotherCustomUserDetails customUserDetails = new AnotherCustomUserDetails(user);
 
 
         //그리고 status를 권한으로 인식해서 넣어준다
