@@ -9,11 +9,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,10 +31,10 @@ public class ApiV1MyInfoController {
             @ApiResponse(responseCode = "200", description = "정보 조회 성공"),
             @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
     })
-    @GetMapping("/myInfo")
-//    public ResponseEntity<MyInfoRequestDto> getMyInfo(Authentication authentication) {
-//        String username = authentication.getName(); // JWT 필터가 유저네임 넣어줌
-    public ResponseEntity<MyInfoResponseDto> getMyInfo(@RequestParam("userName") String userName) {
+    @GetMapping
+    public ResponseEntity<MyInfoResponseDto> getMyInfo(Authentication authentication) {
+        String userName = authentication.getName(); // JWT 필터가 유저네임 넣어줌
+//    public ResponseEntity<MyInfoResponseDto> getMyInfo(@RequestParam("userName") String userName) {
         MyInfoResponseDto dto = myInfoService.getMyInfo(userName);
         return ResponseEntity.ok(dto);
     }
@@ -49,14 +49,14 @@ public class ApiV1MyInfoController {
             @ApiResponse(responseCode = "400", description = "입력 값 오류"),
             @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
     })
-    @PatchMapping("/myinfo/update")
-//    public ResponseEntity<String> updateMyInfo(
-//            @RequestBody MyInfoUpdateRequestDto requestDto, Authentication authentication
-//    ) {
-//        String username = authentication.getName(); // JWT 필터에서 유저네임 꺼내옴
+    @PatchMapping("/update")
     public ResponseEntity<String> updateMyInfo(
-            @RequestParam("userName") String userName,
-            @RequestBody MyInfoUpdateRequestDto myInfoUpdateRequestDto) {
+            @RequestBody MyInfoUpdateRequestDto myInfoUpdateRequestDto, Authentication authentication
+    ) {
+        String userName = authentication.getName(); // JWT 필터에서 유저네임 꺼내옴
+//    public ResponseEntity<String> updateMyInfo(
+//            @RequestParam("userName") String userName,
+//            @RequestBody MyInfoUpdateRequestDto myInfoUpdateRequestDto) {
 
         myInfoService.updateMyInfo(userName, myInfoUpdateRequestDto);
         return ResponseEntity.ok("회원 정보가 성공적으로 수정되었습니다.");
