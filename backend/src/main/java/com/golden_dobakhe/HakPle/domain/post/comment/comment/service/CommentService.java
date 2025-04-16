@@ -4,6 +4,7 @@ import com.golden_dobakhe.HakPle.domain.post.comment.CommentResult;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentRequestDto;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentRepository;
+import com.golden_dobakhe.HakPle.domain.post.comment.exception.CommentException;
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
 import com.golden_dobakhe.HakPle.domain.post.post.repository.BoardRepository;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
@@ -24,18 +25,18 @@ public class CommentService {
     public final UserRepository userRepository;
 
     //댓글 저장
-    public CommentResult commentSave(CommentRequestDto commentRequestDto) {
+    public Comment commentSave(CommentRequestDto commentRequestDto,Long userId) {
        Board board=boardRepository.findById(commentRequestDto.getBoardId()).orElse(null);
        if(board==null){ //게시판이 존재 X
-           return CommentResult.BOARD_NOT_FOUND;
+           throw  new CommentException(CommentResult.BOARD_NOT_FOUND);
        }
-       User user=userRepository.findById(2L).orElse(null); //유저디테일에서 사용자 정보 가져와서 넣기
+       User user=userRepository.findById(userId).orElse(null);
        if(user==null){ //유저 존재 X
-           return CommentResult.USER_NOT_FOUND;
+           throw  new CommentException(CommentResult.USER_NOT_FOUND);
        }
        if(commentRequestDto.getContent() == null || commentRequestDto.getContent().trim().isEmpty()) {
             // 비어 있는 문자열
-            return CommentResult.EMPTY;
+           throw  new CommentException(CommentResult.EMPTY);
        }
 
         Comment comment= Comment.builder()
@@ -46,13 +47,13 @@ public class CommentService {
                .build();
        log.info(comment.toString());
        commentRepository.save(comment);
-     return CommentResult.SUCCESS;
+     return comment;
     }
 
 
     //댓글 수정
-    public CommentResult commentUpdate(CommentRequestDto commentRequestDto) {
-        User user=userRepository.findById(1L).orElse(null); //유저티테일에서 사용자 정보 가져와서 넣기
+    public CommentResult commentUpdate(CommentRequestDto commentRequestDto,Long userId) {
+        User user=userRepository.findById(userId).orElse(null);
         if(user==null){ //유저 존재 X
             return CommentResult.USER_NOT_FOUND;
         }
@@ -60,11 +61,11 @@ public class CommentService {
             // 비어 있는 문자열
             return CommentResult.EMPTY;
         }
-        Comment comment=commentRepository.findById(commentRequestDto.getCommenterId()).orElse(null);
+        Comment comment=commentRepository.findById(commentRequestDto.getCommentId()).orElse(null);
         if(comment==null){ //없는 댓글
             return CommentResult.COMMENT_NOT_FOUND;
         }
-        if(comment.getUser().getId()==2) {//댓글 작성자와 요청을 보낸 사용자가 일치하면 (시큐리티 사용)
+        if(comment.getUser().getId()==userId) {
             comment.setContent(commentRequestDto.getContent());
             log.info(comment.toString());
             return CommentResult.SUCCESS;
@@ -75,16 +76,16 @@ public class CommentService {
     }
 
     //댓글 삭제
-    public CommentResult commentDelete(Long commenterId) {
-        User user=userRepository.findById(1L).orElse(null); //유저티테일에서 사용자 정보 가져와서 넣기
+    public CommentResult commentDelete(Long commentId,Long userId) {
+        User user=userRepository.findById(userId).orElse(null);
         if(user==null){ //유저 존재 X
             return CommentResult.USER_NOT_FOUND;
         }
-        Comment comment=commentRepository.findById(commenterId).orElse(null);
+        Comment comment=commentRepository.findById(commentId).orElse(null);
         if(comment==null){ //없는 댓글
             return CommentResult.COMMENT_NOT_FOUND;
         }
-        if(comment.getUser().getId()==2) {//댓글 작성자와 요청을 보낸 사용자가 일치하면 (시큐리티 사용)
+        if(comment.getUser().getId()==userId) {
             comment.setStatus(Status.INACTIVE);
             log.info(comment.toString());
             return CommentResult.SUCCESS;

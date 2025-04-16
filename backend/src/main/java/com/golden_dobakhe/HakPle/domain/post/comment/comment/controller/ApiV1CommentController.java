@@ -2,11 +2,15 @@ package com.golden_dobakhe.HakPle.domain.post.comment.comment.controller;
 
 import com.golden_dobakhe.HakPle.domain.post.comment.CommentResult;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentRequestDto;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentResponseDto;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.service.CommentService;
+import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,21 +33,15 @@ public class ApiV1CommentController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping
-    public ResponseEntity<String> postComment(@RequestBody CommentRequestDto commentRequestDto) {
-        CommentResult result = commentService.commentSave(commentRequestDto);
+    public ResponseEntity<?> postComment(@RequestBody CommentRequestDto commentRequestDto,
+                                              @AuthenticationPrincipal AnotherCustomUserDetails principal) {
+        Comment comment = commentService.commentSave(commentRequestDto,principal.getUser().getId());
 
-        switch (result) {
-            case SUCCESS:
-                return ResponseEntity.status(HttpStatus.CREATED).body("댓글 저장 완료");
-            case USER_NOT_FOUND:
-                return ResponseEntity.badRequest().body("댓글 저장 실패 : 사용자를 찾을 수 없습니다");
-            case BOARD_NOT_FOUND:
-                return ResponseEntity.badRequest().body("댓글 저장 실패 : 게시물을 찾을 수 없습니다");
-            case EMPTY:
-                return ResponseEntity.badRequest().body("댓글 저장 실패 : Comment Empty 입니다");
-            default:
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 저장 실패 : 서버 오류");
+        if (comment != null) {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new CommentResponseDto(comment.getId(), "댓글 저장 완료"));
         }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 저장 실패");
     }
 
     @Operation(summary = "댓글 수정", description = "기존 댓글을 수정합니다. boardId 요청 필요X")
@@ -54,8 +52,9 @@ public class ApiV1CommentController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/update")
-    public ResponseEntity<String> updateComment(@RequestBody CommentRequestDto commentRequestDto) {
-        CommentResult result = commentService.commentUpdate(commentRequestDto);
+    public ResponseEntity<String> updateComment(@RequestBody CommentRequestDto commentRequestDto,
+                                                @AuthenticationPrincipal AnotherCustomUserDetails principal) {
+        CommentResult result = commentService.commentUpdate(commentRequestDto,principal.getUser().getId());
 
         switch (result) {
             case USER_NOT_FOUND:
@@ -80,9 +79,10 @@ public class ApiV1CommentController {
             @ApiResponse(responseCode = "403", description = "권한 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    @DeleteMapping("/{commenterId}")
-    public ResponseEntity<String> deleteComment(@PathVariable(name = "commenterId") Long commenterId) {
-        CommentResult result = commentService.commentDelete(commenterId);
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<String> deleteComment(@PathVariable(name = "commentId") Long commentId,
+                                                @AuthenticationPrincipal AnotherCustomUserDetails principal) {
+        CommentResult result = commentService.commentDelete(commentId,principal.getUser().getId());
 
         switch (result) {
             case USER_NOT_FOUND:
