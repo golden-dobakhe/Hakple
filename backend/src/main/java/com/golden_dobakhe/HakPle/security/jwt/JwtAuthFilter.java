@@ -139,7 +139,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         log.info(">>> userId: " + userId);
         log.info(">>> JWT Claims: " + claims);
 
-        AnotherCustomUserDetails customUserDetails = new AnotherCustomUserDetails(user);
+        CustomUserDetails customUserDetails = new CustomUserDetails(user);
         return new JwtAuthenticationToken(authorities, customUserDetails, null);
     }
 
