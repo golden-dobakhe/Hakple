@@ -23,5 +23,5 @@ public class MyInfoResponseDto { //사용자 정보 조회용
     private LocalDateTime creationTime;
 
     @Schema(description = "등록된 학원 코드", example = "LLN1234XYZ")
-    private String academyId;
+    private String academyCode;
 }

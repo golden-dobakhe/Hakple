@@ -9,5 +9,5 @@ import lombok.Setter;
 @Schema(description = "학원 코드 등록 요청 DTO")
 public class AcademyCodeRequestDto {
     @Schema(description = "등록할 학원 코드", example = "LLN1234XYZ")
-    private String academyId;
+    private String academyCode;
 }

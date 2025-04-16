@@ -27,7 +27,7 @@ public class MyInfoService {
                 .username(user.getUserName())
                 .phoneNum(user.getPhoneNum())
                 .creationTime(user.getCreationTime())
-                .academyId(user.getAcademyId())
+                .academyCode(user.getAcademyId())
                 .build();
     }
 

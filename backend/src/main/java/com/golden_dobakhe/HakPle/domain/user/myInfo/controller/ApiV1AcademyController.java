@@ -39,7 +39,7 @@ public class ApiV1AcademyController {
 //            @RequestParam("userName") String userName,
 //            @RequestParam("academyCode") String academyCode
 //    ) {
-        String academyName = academyService.registerAcademy(userName, dto.getAcademyId());
+        String academyName = academyService.registerAcademy(userName, dto.getAcademyCode());
         return ResponseEntity.ok("학원이 등록되었습니다: " + academyName);
     }
 }
