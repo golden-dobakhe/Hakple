@@ -24,12 +24,13 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final JwtTokenizer jwtTokenizer;
+    private final JwtAuthFilter jwtAuthFilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
         //접근 제한
         security
-                .addFilterBefore(new JwtAuthFilter(jwtTokenizer), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/failure", "/login",
