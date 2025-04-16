@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,9 +31,13 @@ public class ApiV1AcademyController {
     })
     @GetMapping("/register")
     public ResponseEntity<String> registerAcademy(
-            @RequestParam("userName") String userName,
-            @RequestParam("academyCode") String academyCode
+            @RequestParam("academyCode") String academyCode, Authentication authentication
     ) {
+        String userName = authentication.getName(); // JWT 필터에서 유저네임 꺼내옴
+//    public ResponseEntity<String> registerAcademy(
+//            @RequestParam("userName") String userName,
+//            @RequestParam("academyCode") String academyCode
+//    ) {
         String academyName = academyService.registerAcademy(userName, academyCode);
         return ResponseEntity.ok("학원이 등록되었습니다: " + academyName);
     }
