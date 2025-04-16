@@ -4,8 +4,6 @@ package com.golden_dobakhe.HakPle.security.config;
 import com.golden_dobakhe.HakPle.security.OAuth.CustomOAuth2RequestResolver;
 import com.golden_dobakhe.HakPle.security.OAuth.CustomOAuth2SuccessHandler;
 import com.golden_dobakhe.HakPle.security.jwt.JwtAuthFilter;
-import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -26,19 +24,19 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final JwtTokenizer jwtTokenizer;
+    private final JwtAuthFilter jwtAuthFilter;
     private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
     private final CustomOAuth2RequestResolver customOAuth2RequestResolver;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
         //접근 제한
         security
-                .addFilterBefore(new JwtAuthFilter(jwtTokenizer), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/failure", "/login",
                                 "/oauth2/authorization/kakao?redirectUrl=http://localhost:3000", //카카오 로그인
-
                                 "/swagger-ui/**",            // Swagger UI
                                 "/v3/api-docs/**",           // OpenAPI JSON
                                 "/swagger-resources/**",     // Swagger 리소스

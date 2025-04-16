@@ -86,4 +86,10 @@ public class JwtTokenizer {
                 .getBody();
 
     }
+    public long getRemainingTime(String token) {
+        Claims claims = parseAccessToken(token);
+        Date expiration = claims.getExpiration();
+        return expiration.getTime() - System.currentTimeMillis();
+    }
+
 }
