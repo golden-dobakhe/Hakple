@@ -1,6 +1,7 @@
 package com.golden_dobakhe.HakPle.security;
 
 
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.security.service.TestAuthService;
 import jakarta.servlet.ServletException;
@@ -19,15 +20,14 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class CustomOAuth2SuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-    private final TestAuthService userService;
-    private final UserRepository userRepository;
-    private final Rq rq;
+    private final TestAuthService authService;
+    private final CustomRequest customRequest;
 
     @SneakyThrows
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         //유저를 가져오고
-//        User user = userRepository.findById(rq.getActor().getId()).get();
+        User user authService.findById(customRequest.getActor().getId()).get();
 
         //토큰을 발급
 //        rq.Makecookies(actor);

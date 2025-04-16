@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -18,6 +20,10 @@ public class TestAuthService {
     //일단 간단하게 있는지 없는지 체크
     public User findByUserName(LoginDto dto) {
         return userRepository.findByUserName(dto.getUsername());
+    }
+
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     public void addRefreshToken(User user, String refreshToken) {
@@ -34,6 +40,7 @@ public class TestAuthService {
                 .userName(username)
                 .password(password)
                 .nickName(nickname)
+                .socialProvider("kakao")
                 .build();
 
         return userRepository.save(user);
@@ -44,9 +51,12 @@ public class TestAuthService {
 
         //만약에 있다면 수정
         if (user != null) {
+
             user.setNickName(nickname);
             return user;
         }
+        //핸드폰 번호는 없다
+        //소셜로그인계정으로 로그인시 아이디,비밀번호를 까먹었다면 해당 소셜 서비스에서 바꾸는게 나을듯
         //없으면 참가
         return join(username, "", nickname);
     }

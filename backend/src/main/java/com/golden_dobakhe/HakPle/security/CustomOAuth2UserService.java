@@ -6,11 +6,14 @@ import com.golden_dobakhe.HakPle.global.Status;
 import com.golden_dobakhe.HakPle.security.service.TestAuthService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -49,14 +52,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         User user = testUserService.modifyOrJoin(username, nickname);
 
 
-        //그리고 시큐리티에게 알려줄 객체를 만든다?
+        //그리고 시큐리티에게 알려줄 객체를 만든다
+
         return new SecurityUser(
-                0L,
+                user.getId(),
                 user.getUserName(),
                 user.getPassword(),
-                nickname,
+                user.getNickName(),
                 Status.ACTIVE,
-                null
-    );
+                List.of(new SimpleGrantedAuthority("ROLE_ACTIVE"))
+        );
     }
 }
