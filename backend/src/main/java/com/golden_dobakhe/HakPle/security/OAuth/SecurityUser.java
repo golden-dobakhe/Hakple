@@ -1,4 +1,4 @@
-package com.golden_dobakhe.HakPle.security;
+package com.golden_dobakhe.HakPle.security.OAuth;
 
 import com.golden_dobakhe.HakPle.global.Status;
 import lombok.Getter;

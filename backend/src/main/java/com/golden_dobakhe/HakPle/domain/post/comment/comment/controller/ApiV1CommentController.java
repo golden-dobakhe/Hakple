@@ -5,7 +5,7 @@ import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentRequestD
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.dto.CommentResponseDto;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.service.CommentService;
-import com.golden_dobakhe.HakPle.security.AnotherCustomUserDetails;
+import com.golden_dobakhe.HakPle.security.CustomUserDetails;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class ApiV1CommentController {
     })
     @PostMapping
     public ResponseEntity<?> postComment(@RequestBody CommentRequestDto commentRequestDto,
-                                              @AuthenticationPrincipal AnotherCustomUserDetails principal) {
+                                              @AuthenticationPrincipal CustomUserDetails principal) {
         Comment comment = commentService.commentSave(commentRequestDto,principal.getUser().getId());
 
         if (comment != null) {
@@ -53,7 +53,7 @@ public class ApiV1CommentController {
     })
     @PostMapping("/update")
     public ResponseEntity<String> updateComment(@RequestBody CommentRequestDto commentRequestDto,
-                                                @AuthenticationPrincipal AnotherCustomUserDetails principal) {
+                                                @AuthenticationPrincipal CustomUserDetails principal) {
         CommentResult result = commentService.commentUpdate(commentRequestDto,principal.getUser().getId());
 
         switch (result) {
@@ -81,7 +81,7 @@ public class ApiV1CommentController {
     })
     @DeleteMapping("/{commentId}")
     public ResponseEntity<String> deleteComment(@PathVariable(name = "commentId") Long commentId,
-                                                @AuthenticationPrincipal AnotherCustomUserDetails principal) {
+                                                @AuthenticationPrincipal CustomUserDetails principal) {
         CommentResult result = commentService.commentDelete(commentId,principal.getUser().getId());
 
         switch (result) {
