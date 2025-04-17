@@ -1,11 +1,11 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.service;
 
 import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.Academy;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.validator.AcademyCodeValidator;
 import java.util.Optional;
-import com.golden_dobakhe.HakPle.domain.user.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.AcademyRepository;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

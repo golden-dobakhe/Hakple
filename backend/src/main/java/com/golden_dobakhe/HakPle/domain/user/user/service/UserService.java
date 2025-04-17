@@ -2,10 +2,11 @@ package com.golden_dobakhe.HakPle.domain.user.user.service;
 
 
 import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.WithdrawResult;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.UserDTO;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.Role;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.Status;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
@@ -14,6 +15,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
@@ -39,9 +42,8 @@ public class UserService {
             throw new UserException(UserErrorCode.NICKNAME_DUPLICATE);
         }
 
-
         // 전화번호 중복 확인
-        if (userRepository.existsByPhoneNum(userDTO.getPhoneNumber())) {
+        if (userRepository.existsByPhoneNum(userDTO.getPhoneNum())) {
             throw new UserException(UserErrorCode.PHONENUM_DUPLICATE);
         }
 
@@ -50,8 +52,9 @@ public class UserService {
                 .userName(userDTO.getUserName())
                 .password(passwordEncoder.encode(userDTO.getPassword())) // 비밀번호 암호화
                 .nickName(userDTO.getNickName())
-                .phoneNum(userDTO.getPhoneNumber())
+                .phoneNum(userDTO.getPhoneNum())
                 .status(Status.ACTIVE) // 기본 상태 설정
+                .roles(new HashSet<>(Set.of(Role.USER)))
                 .build();
 
         userRepository.save(user);

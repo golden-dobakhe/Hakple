@@ -1,19 +1,15 @@
-package com.golden_dobakhe.HakPle.domain.user.user.dto;
+package com.golden_dobakhe.HakPle.domain.user.admin.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
-
-@Getter
-@Setter
+@Data
 @Schema(description = "회원가입 시 입력하는 사용자 정보 DTO")
-public class UserDTO {
-
+public class AdminRegisterDto {
     @NotBlank(message = "닉네임은 필수 입력값입니다.")
     @Pattern(
             regexp = "^[가-힣a-zA-Z0-9._-]{2,20}$",
@@ -27,9 +23,8 @@ public class UserDTO {
             regexp = "^01[0-9]{1}-?[0-9]{3,4}-?[0-9]{4}$",
             message = "전화번호는 10~11자리 숫자만 입력 가능합니다."
     )
-
     @Schema(description = "휴대폰 번호 (하이픈 - 생략 가능)", example = "01012345678")
-    private String phoneNum;
+    private String phoneNumber;
 
     @NotBlank(message = "아이디는 필수 입력값입니다.")
     @Size(min = 4, max = 15, message = "아이디는 최소 4자 최대 15자까지 입력 가능합니다.")

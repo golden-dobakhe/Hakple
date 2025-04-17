@@ -30,42 +30,42 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
-        //접근 제한
         security
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/failure", "/login",
-                                "/oauth2/authorization/kakao?redirectUrl=http://localhost:3000", //카카오 로그인
-                                "/swagger-ui/**",            // Swagger UI
-                                "/v3/api-docs/**",           // OpenAPI JSON
-                                "/swagger-resources/**",     // Swagger 리소스
-                                "/webjars/**",               // Swagger static
-                                "/api/v1/**"
-                                         ).permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(
+                                "/", "/failure", "/login",
+                                "/oauth2/authorization/kakao?redirectUrl=http://localhost:3000",
+                                "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**",
+
+                                // ✅ 관리자 로그인/회원가입은 열어두기
+                                "/api/v1/admin/login",
+                                "/api/v1/admin/register"
+                        ).permitAll()
+
+                        // ✅ 그 외 관리자 API는 ADMIN 권한 필요
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+
+                        // ✅ 나머지 열어둠 (필요하면 authenticated()로 바꿔도 됨)
+                        .anyRequest().permitAll()
+                )
                 .sessionManagement(session -> session
-                        //세션을 저장하지 않는다 -> 세션을 사용하지 않겠다는 뜻 jwt인증을 쓸거니까
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //http베이직은 헤더에서 보안에 취약하고 쟤를 빼버리고, 다른 인증수단인 베어러(얜 이거 빼면 자동으로 지정됨)으로 한다고 한다
-                //이후 요청시 헤더에 Authorization
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .formLogin(form -> form.disable())
-                //소셜 로그인은 여기서 진행된다
                 .oauth2Login(oauth2LoginConfig -> oauth2LoginConfig
                         .successHandler(customOAuth2SuccessHandler)
-                        .authorizationEndpoint(
-                                authorizationEndpointConfig ->
-                                        authorizationEndpointConfig
-                                                .authorizationRequestResolver(customOAuth2RequestResolver)
+                        .authorizationEndpoint(endpoint -> endpoint
+                                .authorizationRequestResolver(customOAuth2RequestResolver)
                         )
-                )
-        ;
-        //문제가 생기면 .anyRequest().permitAll() // 🔓 모든 요청 허용로 일단은 바꿔보고 해보세요, 필터는 jwt로 바꾸었습니다
-        return security.build();
+                );
 
+        return security.build();
     }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
