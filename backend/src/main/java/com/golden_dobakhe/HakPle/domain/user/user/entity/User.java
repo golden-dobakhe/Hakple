@@ -45,7 +45,7 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status; // ENUM('active', 'inactive', 'pending', 'admin')
+    private Status status; // ENUM('active', 'inactive', 'pending')
 
     @Column(length = 255)
     private String refreshToken; // JWT 리프레시 토큰
