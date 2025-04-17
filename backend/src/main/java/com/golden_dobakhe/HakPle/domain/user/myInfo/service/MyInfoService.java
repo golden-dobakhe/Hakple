@@ -1,12 +1,12 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.service;
 
 import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.dto.MyInfoResponseDto;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.dto.MyInfoUpdateRequestDto;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.validator.NickNameValidator;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.validator.PhoneNumValidator;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -14,7 +14,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -43,6 +45,8 @@ public class JwtAuthenticationProvider {
         // ✅ 토큰에서 정보 파싱
         String userName = claims.getSubject();
         Object userIdRaw = claims.get("userId");
+        List<String> roleNames = (List<String>) claims.get("roles");
+
         Long userId = null;
 
         if (userIdRaw instanceof Integer) {
@@ -56,6 +60,7 @@ public class JwtAuthenticationProvider {
         if (userId == null) {
             throw new IllegalStateException("JWT에 userId가 없습니다!");
         }
+
 
         // ✅ DB에서 유저 상태 확인 (탈퇴/정지 여부)
         User user = userRepository.findById(userId).orElse(null);
@@ -77,9 +82,10 @@ public class JwtAuthenticationProvider {
                 .id(userId)
                 .build();
 
-        List<GrantedAuthority> authorities = List.of(
-                new SimpleGrantedAuthority("ROLE_" + statusStr.toUpperCase())
-        );
+        // 문자열 → GrantedAuthority로 변환
+        Collection<GrantedAuthority> authorities = roleNames.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role)) // 혹시 ROLE_ 빠졌다면 붙이기
+                .collect(Collectors.toList());
 
         log.info("✅ 사용자 인증 완료: userId = {}", userId);
         CustomUserDetails customUserDetails = new CustomUserDetails(userForPrincipal);
