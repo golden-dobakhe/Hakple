@@ -3,6 +3,7 @@ package com.golden_dobakhe.HakPle.security.jwt;
 //시큐리티에게 jwt를 넘겨주기 위한 필터
 
 
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -18,11 +20,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Slf4j
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
+
+
 
     //시큐리티가 실행되기 이전 토큰을 시큐리티에게 알려주는 필터
     @Override
@@ -85,8 +89,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         return null;
     }
-
-
 
 
 }

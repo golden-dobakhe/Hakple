@@ -3,7 +3,6 @@ package com.golden_dobakhe.HakPle.security.OAuth;
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.global.Status;
-import com.golden_dobakhe.HakPle.security.SecurityUser;
 import com.golden_dobakhe.HakPle.security.service.AuthService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -3,7 +3,7 @@ package com.golden_dobakhe.HakPle.security.service;
 
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.security.TestRepository;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.security.dto.LoginDto;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService {
-    private final TestRepository userRepository;
+    private final UserRepository userRepository;
     private final JwtTokenizer jwtTokenizer;
 
     //일단 간단하게 있는지 없는지 체크
     public User findByUserName(LoginDto dto) {
-        return userRepository.findByUserName(dto.getUsername());
+        return userRepository.findByUserName(dto.getUsername()).get();
     }
 
     public Optional<User> findById(Long userId) {
@@ -43,10 +43,11 @@ public class AuthService {
     //소셜로그인에 가입한 유저를 새로 만들기
     public User join(String username, String password, String nickname) {
 
-        if (userRepository.findByUserName(username) != null) {
+        if (userRepository.existsByUserName(username)) {
             throw new RuntimeException("해당 username은 이미 사용중입니다.");
         };
 
+        //나중에 프사 추가 하십셔
         User user = User.builder()
                 .userName(username)
                 .password(password)
@@ -58,7 +59,7 @@ public class AuthService {
     }
 
     public User modifyOrJoin(String username, String nickname) {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUserName(username).get();
 
         //만약에 있다면 수정
         if (user != null) {

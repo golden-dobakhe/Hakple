@@ -1,6 +1,8 @@
-package com.golden_dobakhe.HakPle.security;
+package com.golden_dobakhe.HakPle.security.utils;
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.security.CustomUserDetails;
+import com.golden_dobakhe.HakPle.security.CustomUserDetailsService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
