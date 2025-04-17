@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/vi/auth")
+@RequestMapping("/api/v1/auth")
 public class ApiV1AuthController {
     private final AuthService authService;
     private final PasswordEncoder passwordEncoder;

@@ -1,5 +1,6 @@
 package com.golden_dobakhe.HakPle.security.jwt;
 
+import com.golden_dobakhe.HakPle.domain.user.user.entity.Role;
 import com.golden_dobakhe.HakPle.global.Status;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import java.util.Set;
 
 @Component
 public class JwtTokenizer {
@@ -21,20 +23,21 @@ public class JwtTokenizer {
 
     //@Value로 application.yml에 있는 환경변수값을 불러와서 생성
     //이따가 secret에서 가져오시오
-    public JwtTokenizer(@Value("${jwt.secretKey}") String accessSecret, @Value("{jwt.refreshKey}") String refreshSecret) {
+    public JwtTokenizer(@Value("${jwt.secretKey}") String accessSecret, @Value("${jwt.refreshKey}") String refreshSecret) {
         this.accessSecret = accessSecret.getBytes(StandardCharsets.UTF_8);
         this.refreshSecret = refreshSecret.getBytes(StandardCharsets.UTF_8);
     }
 
     //토큰 만들기
     private String createToken(Long id, String userName, String nickName, String phoneNum, Status status
-    , Long expire, byte[] secretKey) {
+    , Long expire, byte[] secretKey,Set<Role> roles) {
 
         //토큰에 넣을 요소를 만들기
         Claims claims = Jwts.claims().setSubject(userName);
         claims.put("nickName", nickName);
         claims.put("status", status);
         claims.put("userId",id); //userId 추가
+        claims.put("roles",roles);
 
 
         //토큰에 그 요소들을 넣기
@@ -48,12 +51,12 @@ public class JwtTokenizer {
     }
 
     //access, refresh토큰 각각만들기
-    public String createAccessToken(Long id, String userName, String nickName, String phoneNum, Status status) {
-        return createToken(id, userName, nickName, phoneNum, status, ACCESS_TOKEN_EXPIRE_COUNT, accessSecret);
+    public String createAccessToken(Long id, String userName, String nickName, String phoneNum, Status status, Set<Role> roles) {
+        return createToken(id, userName, nickName, phoneNum, status, ACCESS_TOKEN_EXPIRE_COUNT, accessSecret,roles);
     }
 
-    public String createRefreshToken(Long id, String userName, String nickName, String phoneNum, Status status) {
-        return createToken(id, userName, nickName, phoneNum, status, ACCESS_TOKEN_EXPIRE_COUNT, accessSecret);
+    public String createRefreshToken(Long id, String userName, String nickName, String phoneNum, Status status,Set<Role> roles) {
+        return createToken(id, userName, nickName, phoneNum, status, ACCESS_TOKEN_EXPIRE_COUNT, accessSecret,roles);
     }
 
     //jwt인증에 필요한 서명만들기
