@@ -27,8 +27,9 @@ public class UserDTO {
             regexp = "^01[0-9]{1}-?[0-9]{3,4}-?[0-9]{4}$",
             message = "전화번호는 10~11자리 숫자만 입력 가능합니다."
     )
+
     @Schema(description = "휴대폰 번호 (하이픈 - 생략 가능)", example = "01012345678")
-    private String phoneNumber;
+    private String phoneNum;
 
     @NotBlank(message = "아이디는 필수 입력값입니다.")
     @Size(min = 4, max = 15, message = "아이디는 최소 4자 최대 15자까지 입력 가능합니다.")

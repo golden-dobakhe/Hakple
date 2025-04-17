@@ -42,9 +42,8 @@ public class UserService {
             throw new UserException(UserErrorCode.NICKNAME_DUPLICATE);
         }
 
-
         // 전화번호 중복 확인
-        if (userRepository.existsByPhoneNum(userDTO.getPhoneNumber())) {
+        if (userRepository.existsByPhoneNum(userDTO.getPhoneNum())) {
             throw new UserException(UserErrorCode.PHONENUM_DUPLICATE);
         }
 
@@ -53,7 +52,7 @@ public class UserService {
                 .userName(userDTO.getUserName())
                 .password(passwordEncoder.encode(userDTO.getPassword())) // 비밀번호 암호화
                 .nickName(userDTO.getNickName())
-                .phoneNum(userDTO.getPhoneNumber())
+                .phoneNum(userDTO.getPhoneNum())
                 .status(Status.ACTIVE) // 기본 상태 설정
                 .roles(new HashSet<>(Set.of(Role.USER)))
                 .build();
