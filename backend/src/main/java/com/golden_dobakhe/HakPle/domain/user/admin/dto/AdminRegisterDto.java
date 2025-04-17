@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.Getter;
 
 @Data
-@Getter
 @Schema(description = "회원가입 시 입력하는 사용자 정보 DTO")
 public class AdminRegisterDto {
     @NotBlank(message = "닉네임은 필수 입력값입니다.")
