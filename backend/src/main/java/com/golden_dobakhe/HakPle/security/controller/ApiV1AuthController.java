@@ -12,16 +12,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-//일단 시험용으로 만들어 놓긴 했는데
-//추후 이걸 가지고 복붙 하거나 지울 수 있음
-public class AuthController {
+@RequestMapping("/api/v1/auth")
+public class ApiV1AuthController {
     private final AuthService authService;
     private final PasswordEncoder passwordEncoder;
 
@@ -76,13 +72,4 @@ public class AuthController {
         return ResponseEntity.ok(loginResponseDto);
     }
 
-    @GetMapping("/success")
-    public ResponseEntity<String> success() {
-        return ResponseEntity.ok("야스");
-    }
-
-    @GetMapping("failure")
-    public ResponseEntity<String> failure() {
-        return ResponseEntity.notFound().build();
-    }
 }

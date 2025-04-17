@@ -36,6 +36,9 @@ public enum UserErrorCode {
     @Schema(description = "Refresh 토큰 삭제 실패")
     REFRESH_TOKEN_DELETE_FAIL("Refresh 토큰 삭제 중 오류 발생", HttpStatus.INTERNAL_SERVER_ERROR),
 
+    @Schema(description = "ADMIN 접근 권한이 없습니다")
+    FORBIDDEN("접근 권한이 없습니다.",HttpStatus.UNAUTHORIZED),
+
     @Schema(description = "인증되지 않은 사용자")
     UNAUTHORIZED("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
 

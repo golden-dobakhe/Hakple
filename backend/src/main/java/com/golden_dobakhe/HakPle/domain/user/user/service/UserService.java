@@ -5,6 +5,7 @@ import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
 import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.WithdrawResult;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.UserDTO;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.Role;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.Status;
@@ -14,6 +15,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
@@ -51,6 +54,7 @@ public class UserService {
                 .nickName(userDTO.getNickName())
                 .phoneNum(userDTO.getPhoneNum())
                 .status(Status.ACTIVE) // 기본 상태 설정
+                .roles(new HashSet<>(Set.of(Role.USER)))
                 .build();
 
         userRepository.save(user);

@@ -1,7 +1,6 @@
 package com.golden_dobakhe.HakPle.security.OAuth;
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.security.SecurityUser;
 import com.golden_dobakhe.HakPle.security.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
