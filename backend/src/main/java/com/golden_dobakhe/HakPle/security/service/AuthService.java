@@ -3,6 +3,7 @@ package com.golden_dobakhe.HakPle.security.service;
 
 
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.global.Status;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.security.dto.LoginDto;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;

@@ -1,6 +1,7 @@
 package com.golden_dobakhe.HakPle.domain.user.myInfo.service;
 
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.global.Status;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.repository.UsernameRepository;
 import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

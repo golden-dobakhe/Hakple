@@ -7,9 +7,11 @@ import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentRepository;
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
 import com.golden_dobakhe.HakPle.domain.post.post.repository.BoardRepository;
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+
+
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.global.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -82,7 +84,7 @@ public class CommentService {
             // 비어 있는 문자열
             return CommentResult.EMPTY;
         }
-        Comment comment=commentRepository.findById(commentRequestDto.getCommenterId()).orElse(null);
+        Comment comment=commentRepository.findById(commentRequestDto.getCommentId()).orElse(null);
         if(comment==null){ //없는 댓글
             return CommentResult.COMMENT_NOT_FOUND;
         }

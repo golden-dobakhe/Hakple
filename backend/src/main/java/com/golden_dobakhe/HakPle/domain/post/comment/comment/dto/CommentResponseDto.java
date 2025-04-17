@@ -1,7 +1,8 @@
 package com.golden_dobakhe.HakPle.domain.post.comment.comment.dto;
 
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+
+import com.golden_dobakhe.HakPle.global.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -11,11 +11,14 @@ import com.golden_dobakhe.HakPle.domain.post.post.service.BoardService;
 
 import com.golden_dobakhe.HakPle.domain.resource.image.entity.Image;
 import com.golden_dobakhe.HakPle.domain.resource.image.repository.ImageRepository;
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.repository.UserRepository;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+
+
+
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentRepository;
 
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
+import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
+import com.golden_dobakhe.HakPle.global.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -28,11 +28,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	runtimeOnly("com.h2database:h2")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
-	implementation ("org.springframework.boot:spring-boot-starter-security") //security
+//  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+	implementation("org.springframework.boot:spring-boot-starter-security") //security
 
-	// AWS S3
-	implementation("com.amazonaws:aws-java-sdk-s3:1.12.782")
 
 	// JWT & JSON
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
@@ -45,11 +44,17 @@ dependencies {
 	// Validation
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 
+	//누리고
+	implementation("net.nurigo:sdk:4.2.7") // 누리고 SDK
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+	// Oauth2
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
 }
 
-
-
-//// Docker Compose 설정 (정상 작동되는 버전)
+// Docker Compose 설정 (정상 작동되는 버전)
 dockerCompose {
 	useComposeFiles.set(listOf("docker-compose.yml"))
 	startedServices.set(listOf("mysql"))
@@ -64,5 +69,5 @@ tasks.named("bootRun") {
 	finalizedBy("dockerComposeDown") // bootRun 작업 종료 후 dockerComposeDown 실행
 }
 tasks.withType<JavaCompile> {
-    options.compilerArgs.add("-parameters")
+	options.compilerArgs.add("-parameters")
 }

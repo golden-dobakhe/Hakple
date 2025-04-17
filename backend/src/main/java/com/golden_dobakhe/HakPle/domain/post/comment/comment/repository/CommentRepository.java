@@ -1,7 +1,8 @@
 package com.golden_dobakhe.HakPle.domain.post.comment.comment.repository;
 
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+
+import com.golden_dobakhe.HakPle.global.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
