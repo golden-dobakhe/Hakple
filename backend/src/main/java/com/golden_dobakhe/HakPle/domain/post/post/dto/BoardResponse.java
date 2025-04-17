@@ -1,6 +1,6 @@
 package com.golden_dobakhe.HakPle.domain.post.post.dto;
 import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
-import com.golden_dobakhe.HakPle.global.entity.Status;
+import com.golden_dobakhe.HakPle.global.Status;
 import lombok.*;
 
 import java.time.LocalDateTime;

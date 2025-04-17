@@ -3,8 +3,11 @@ package com.golden_dobakhe.HakPle.domain.post.comment.like.controller;
 import com.golden_dobakhe.HakPle.domain.post.comment.CommentResult;
 import com.golden_dobakhe.HakPle.domain.post.comment.like.dto.LikedCommentDto;
 import com.golden_dobakhe.HakPle.domain.post.comment.like.service.LikeService;
-import com.golden_dobakhe.HakPle.domain.user.entity.User;
+
+
+import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.security.CustomUserDetails;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -14,8 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/likes")
@@ -84,6 +87,7 @@ public class ApiV1LikeController {
     public ResponseEntity<CommentResult> unlikeComment(
             @PathVariable(name ="commentId") Long commentId,
             @AuthenticationPrincipal CustomUserDetails principal
+
     ) {
         User user = principal.getUser();
         CommentResult result = likeService.unlikeComment(commentId, user);

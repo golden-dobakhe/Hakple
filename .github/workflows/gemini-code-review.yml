@@ -34,7 +34,6 @@ jobs:
           git fetch origin "${{ github.event.pull_request.base.ref }}"
           git fetch origin "${{ github.event.pull_request.head.ref }}"
           git diff --unified=0 "origin/${{ github.event.pull_request.base.ref }}" > "diff.txt"
-
           echo "EVENT_TYPE=pull_request" >> $GITHUB_ENV
 
       # Push 이벤트에서의 변경사항 처리
