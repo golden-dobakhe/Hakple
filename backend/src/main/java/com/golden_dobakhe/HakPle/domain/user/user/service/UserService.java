@@ -2,10 +2,10 @@ package com.golden_dobakhe.HakPle.domain.user.user.service;
 
 
 import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.WithdrawResult;
 import com.golden_dobakhe.HakPle.domain.user.user.dto.UserDTO;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
-import com.golden_dobakhe.HakPle.domain.user.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.Status;
 import com.golden_dobakhe.HakPle.security.jwt.JwtTokenizer;
@@ -38,7 +38,6 @@ public class UserService {
         if (userRepository.existsByNickName(userDTO.getNickName())) {
             throw new UserException(UserErrorCode.NICKNAME_DUPLICATE);
         }
-
 
         // 전화번호 중복 확인
         if (userRepository.existsByPhoneNum(userDTO.getPhoneNum())) {

@@ -2,8 +2,7 @@ package com.golden_dobakhe.HakPle.global.exception;
 
 import com.golden_dobakhe.HakPle.domain.post.post.exception.BoardException;
 import com.golden_dobakhe.HakPle.domain.resource.image.exception.ProfileImageException;
-//import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
-import com.golden_dobakhe.HakPle.domain.user.user.exception.UserException;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.myInfo.exception.MyInfoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
