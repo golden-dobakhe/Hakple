@@ -1,5 +1,12 @@
 package com.golden_dobakhe.HakPle.domain.user.admin.service;
 
+import com.golden_dobakhe.HakPle.domain.post.comment.CommentResult;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.entity.Comment;
+import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentRepository;
+import com.golden_dobakhe.HakPle.domain.post.comment.exception.CommentException;
+import com.golden_dobakhe.HakPle.domain.post.post.entity.Board;
+import com.golden_dobakhe.HakPle.domain.post.post.exception.BoardException;
+import com.golden_dobakhe.HakPle.domain.post.post.repository.BoardRepository;
 import com.golden_dobakhe.HakPle.domain.user.admin.dto.AcademyRequestDto;
 import com.golden_dobakhe.HakPle.domain.user.admin.dto.AdminLoginDto;
 import com.golden_dobakhe.HakPle.domain.user.admin.dto.AdminRegisterDto;
@@ -33,6 +40,8 @@ public class AdminService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenizer jwtTokenizer;
     private final AcademyRepository academyRepository;
+    private final BoardRepository boardRepository;
+    private final CommentRepository commentRepository;
 
     public String registerAdmin(AdminRegisterDto dto) {
         if (userRepository.existsByUserName(dto.getUserName())) {
@@ -135,5 +144,16 @@ public class AdminService {
         academyRepository.save(academy);
         return code;
     }
-
+    //게시물 삭제 처리
+    public void setBoardPending(Long boardId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> BoardException.notFound("해당 게시물이 존재하지 않습니다"));
+        board.setStatus(Status.PENDING);
+    }
+    //댓글 삭제 처리
+    public void setCommentPending(Long commentId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new CommentException(CommentResult.COMMENT_NOT_FOUND));
+        comment.setStatus(Status.PENDING);
+    }
 }

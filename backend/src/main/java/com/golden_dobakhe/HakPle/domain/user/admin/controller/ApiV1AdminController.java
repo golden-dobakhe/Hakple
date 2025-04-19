@@ -49,6 +49,19 @@ public class ApiV1AdminController {
         return ResponseEntity.ok(academyCode);
     }
 
+    @PostMapping("/boards/{id}/pending")
+    @Operation(summary = "게시글 상태를 PENDING으로 변경", description = "신고된 게시글을 PENDING 상태로 변경합니다.")
+    public ResponseEntity<Void> setBoardPending(@PathVariable(name = "id") Long id) {
+        adminService.setBoardPending(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/comments/{id}/pending")
+    @Operation(summary = "댓글 상태를 PENDING으로 변경", description = "신고된 댓글을 PENDING 상태로 변경합니다.")
+    public ResponseEntity<Void> setCommentPending(@PathVariable(name = "id")  Long id) {
+        adminService.setCommentPending(id);
+        return ResponseEntity.ok().build();
+    }
 }
 
 

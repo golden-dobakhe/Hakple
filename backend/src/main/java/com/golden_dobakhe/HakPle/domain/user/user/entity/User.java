@@ -56,4 +56,7 @@ public class User extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "profile_image_id", referencedColumnName = "id")
     private Image profileImage; // 프로필 이미지 (Image 엔티티와 연결)
+
+    @Column(name = "reported_count")
+    private int reportedCount; // 신고 누적 수
 }

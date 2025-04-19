@@ -14,6 +14,8 @@ import com.golden_dobakhe.HakPle.domain.resource.image.repository.ImageRepositor
 
 import com.golden_dobakhe.HakPle.domain.post.comment.comment.repository.CommentRepository;
 
+import com.golden_dobakhe.HakPle.domain.user.exception.UserErrorCode;
+import com.golden_dobakhe.HakPle.domain.user.exception.UserException;
 import com.golden_dobakhe.HakPle.domain.user.user.entity.User;
 import com.golden_dobakhe.HakPle.domain.user.user.repository.UserRepository;
 import com.golden_dobakhe.HakPle.global.Status;
@@ -259,6 +261,12 @@ public class BoardServiceImpl implements BoardService {
                 .orElseThrow(() -> BoardException.notFound());
 
         board.validateStatus();
+
+        User user=userRepository.findById(board.getUser().getId()).orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND));
+
+        user.setReportedCount(user.getReportedCount() + 1); //신고 횟수 누적
+
+
 
         if (boardReportRepository.findByBoardIdAndUserId(boardId, userId).isPresent()) {
             throw BoardException.invalidRequest();
